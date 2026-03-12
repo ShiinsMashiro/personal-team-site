@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore The Unseen | 徒步团队展示</title>
+    <meta
+      id="meta-description"
+      name="description"
+      content="Explore The Unseen 的徒步团队展示网站，以冷峻克制的叙事方式呈现成员、征服地点、装备与路线方法。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <audio id="bgm-audio" loop preload="auto" autoplay playsinline></audio>
+
+    <button class="bgm-toggle" id="bgm-toggle" type="button" aria-pressed="false">
+      BGM Off
+    </button>
+
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="brand" href="#top">
+          <span class="brand-mark">EU</span>
+          <span id="brand-text">Explore The Unseen</span>
+        </a>
+        <nav class="site-nav">
+          <a id="nav-story" href="#story">团队</a>
+          <a id="nav-plans" href="#future-plans">未来计划</a>
+          <a id="nav-history" href="#summits">过往履历</a>
+          <a id="nav-gear" href="#gear">装备</a>
+          <a id="nav-members" href="#members">成员</a>
+          <a id="nav-contact" href="#contact">联系</a>
+        </nav>
+        <div class="lang-switch" id="lang-switch" aria-label="Language switcher">
+          <button class="lang-btn is-active" type="button" data-lang="zh">中</button>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal" data-reveal="hero">
+        <p class="eyebrow" id="hero-eyebrow">Explore The Unseen</p>
+        <h1 id="hero-title">去那些尚未被语言<br />完全命名的地方。</h1>
+        <p class="hero-text" id="hero-text">
+          冷静进入未知。<br />
+          克制抵达高处。
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" id="hero-button-plans" href="#future-plans">查看计划</a>
+          <a class="button button-secondary" id="hero-button-members" href="#members">成员档案</a>
+        </div>
+      </section>
+
+      <section class="hero-media reveal" data-reveal="hero-media">
+        <div class="hero-device">
+          <div class="device-glow"></div>
+          <div class="device-frame">
+            <div class="device-screen">
+              <div class="screen-topline" id="screen-topline">Explore The Unseen</div>
+              <div class="screen-title" id="screen-title">Beyond the named trail, there is still altitude.</div>
+              <div class="screen-grid">
+                <span id="screen-grid-1">4 Members</span>
+                <span id="screen-grid-2">5 Targets</span>
+                <span id="screen-grid-3">Next Ascent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="story" class="statement reveal" data-reveal="statement">
+        <p class="eyebrow" id="story-eyebrow">About The Team</p>
+        <h2 id="story-title">四个人。 一套秩序。 向未被看清之地稳定推进。</h2>
+        <p id="story-text">
+          判断、配速、补给、协作，同时成立。
+        </p>
+      </section>
+
+      <section id="future-plans" class="showcase reveal" data-reveal="plans">
+        <div class="showcase-intro">
+          <p class="eyebrow" id="plans-eyebrow">Future Plans</p>
+          <h2 id="plans-title">接下来要去的山，决定现在怎么准备。</h2>
+        </div>
+        <div class="slider-shell">
+          <div class="product-grid future-grid slider-grid" data-slider="plans">
+            <article class="product-panel panel-wide plan-qinling">
+              <p id="plan-1-name">秦岭</p>
+              <h3 id="plan-1-title">主计划。</h3>
+              <span id="plan-1-text">纵深山系，连续判断。</span>
+            </article>
+            <article class="product-panel plan-huangshan">
+              <p id="plan-2-name">黄山</p>
+              <h3 id="plan-2-title">高密度景观。</h3>
+              <span id="plan-2-text">复杂起伏，重新配速。</span>
+            </article>
+            <article class="product-panel plan-wugongshan">
+              <p id="plan-3-name">武功山反穿</p>
+              <h3 id="plan-3-title">重写熟悉路线。</h3>
+              <span id="plan-3-text">反穿节奏，持续推进。</span>
+            </article>
+            <article class="product-panel plan-huashan">
+              <p id="plan-4-name">华山</p>
+              <h3 id="plan-4-title">进入险峻地形。</h3>
+              <span id="plan-4-text">稳定动作，稳定判断。</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="summits" class="feature-section reveal" data-reveal="history">
+        <div class="feature-copy">
+          <p class="eyebrow" id="history-eyebrow">Completed Routes</p>
+          <h2 id="history-title">已经走过的地方，并不用于停留，而是用来证明下一次出发并非空谈。</h2>
+          <p id="history-text">
+            这些地点构成了团队至今为止的路径履历。它们不是终点陈列，而是一组持续累积的方法依据，
+            说明我们如何在不同地貌与环境里，把计划真正兑现为完成。
+          </p>
+        </div>
+        <div class="feature-stage">
+          <article class="spotlight-panel history-dapanjian">
+            <span>01</span>
+            <h3 id="history-1-title">金华大盘尖穿越</h3>
+            <p id="history-1-text">海拔 1312 米的大盘尖被视作兰溪第一高峰，古道、山脊与辽阔视野在这里同时展开，适合检验队伍在浙中山地里的持续推进能力。</p>
+          </article>
+          <article class="spotlight-panel history-aixinxian">
+            <span>02</span>
+            <h3 id="history-2-title">杭州爱心线</h3>
+            <p id="history-2-text">围绕西湖山体形成的爱心线全程约 20 公里、累计爬升约 700 米，城市边缘与连续山路交替出现，对节奏与耐力提出了更隐性的要求。</p>
+          </article>
+          <article class="spotlight-panel history-changbaishan">
+            <span>03</span>
+            <h3 id="history-3-title">长白山</h3>
+            <p id="history-3-text">作为东北重要山系与典型火山地貌区域，长白山以显著的垂直景观、火山口湖与高海拔气候变化，持续压缩队伍对环境的误判空间。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="gear" class="gear reveal" data-reveal="gear">
+        <div class="showcase-intro">
+          <p class="eyebrow" id="gear-eyebrow">Gear Setup</p>
+          <h2 id="gear-title">装备不是附属品，而是行动系统。</h2>
+        </div>
+        <div class="slider-shell">
+          <div class="gear-grid slider-grid" data-slider="gear">
+            <button
+              class="gear-card gear-card-large gear-poster gear-core"
+              type="button"
+              data-gear="core"
+              aria-haspopup="dialog"
+            >
+              <p id="gear-1-name">核心装备</p>
+              <h3 id="gear-1-title">基础行动系统。</h3>
+              <span id="gear-1-text">基础配置。</span>
+            </button>
+            <button
+              class="gear-card gear-poster gear-safety"
+              type="button"
+              data-gear="safety"
+              aria-haspopup="dialog"
+            >
+              <p id="gear-2-name">安全装备</p>
+              <h3 id="gear-2-title">风险冗余系统。</h3>
+              <span id="gear-2-text">风险冗余。</span>
+            </button>
+            <button
+              class="gear-card gear-poster gear-weather"
+              type="button"
+              data-gear="weather"
+              aria-haspopup="dialog"
+            >
+              <p id="gear-3-name">环境对应</p>
+              <h3 id="gear-3-title">环境适配系统。</h3>
+              <span id="gear-3-text">环境切换。</span>
+            </button>
+            <button
+              class="gear-card gear-poster gear-supply"
+              type="button"
+              data-gear="supply"
+              aria-haspopup="dialog"
+            >
+              <p id="gear-4-name">补给系统</p>
+              <h3 id="gear-4-title">续航管理系统。</h3>
+              <span id="gear-4-text">续航系统。</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="members" class="members reveal" data-reveal="members">
+        <div class="showcase-intro">
+          <p class="eyebrow" id="members-eyebrow">Team Members</p>
+          <h2 id="members-title">四个不同背景的人，在山里形成了一种比分工更精密的结构。</h2>
+        </div>
+        <div class="member-grid">
+          <button
+            class="member-card member-poster member-xie"
+            type="button"
+            data-member="xie"
+            aria-haspopup="dialog"
+          >
+            <span class="member-index">01</span>
+            <div class="member-card-content">
+              <h3 id="member-1-name">谢弘毅</h3>
+              <p id="member-1-role">领队主轴 / 公职气质的秩序建立者</p>
+            </div>
+          </button>
+          <button
+            class="member-card member-poster member-chen"
+            type="button"
+            data-member="chen"
+            aria-haspopup="dialog"
+          >
+            <span class="member-index">02</span>
+            <div class="member-card-content">
+              <h3 id="member-2-name">陈云哲</h3>
+              <p id="member-2-role">负重管理 / 装备与状态的双重维护者</p>
+            </div>
+          </button>
+          <button
+            class="member-card member-poster member-huang"
+            type="button"
+            data-member="huang"
+            aria-haspopup="dialog"
+          >
+            <span class="member-index">03</span>
+            <div class="member-card-content">
+              <h3 id="member-3-name">黄涂健隆</h3>
+              <p id="member-3-role">影像记录 / 技术与情趣的提炼者</p>
+            </div>
+          </button>
+          <button
+            class="member-card member-poster member-jiang"
+            type="button"
+            data-member="jiang"
+            aria-haspopup="dialog"
+          >
+            <span class="member-index">04</span>
+            <div class="member-card-content">
+              <h3 id="member-4-name">姜伟杨</h3>
+              <p id="member-4-role">补给安全 / 稳定续航的守护者</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section class="metrics reveal" data-reveal="metrics">
+        <div class="metric">
+          <strong>12+</strong>
+          <span id="metric-1">已完成路线</span>
+        </div>
+        <div class="metric">
+          <strong>4</strong>
+          <span id="metric-2">长期成员</span>
+        </div>
+        <div class="metric">
+          <strong>5</strong>
+          <span id="metric-3">当前计划中的目标方向</span>
+        </div>
+      </section>
+
+      <section id="contact" class="contact reveal" data-reveal="contact">
+        <p class="eyebrow" id="contact-eyebrow">Contact</p>
+        <h2 id="contact-title">当真实的山脊、真实的装备与真实的成员经历被放进这里，这个页面就不再只是展示，而会成为团队叙事本身。</h2>
+        <p class="contact-text" id="contact-text">
+          目前仍是示例文本。只要继续替换真实地点、成员履历、装备照片与联系方式，
+          它就会从一个原型页面，变成真正属于你们这支徒步团队的正式门面。
+        </p>
+        <div class="contact-actions">
+          <a href="mailto:shiinamashinro@gmail.com">shiinamashinro@gmail.com</a>
+          <a href="tel:17706403360">17706403360</a>
+          <a href="#" id="contact-wechat">微信：htjl17706403360</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="member-modal" id="member-modal" aria-hidden="true">
+      <div class="member-modal-backdrop" data-close-modal="true"></div>
+      <div class="member-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="member-modal-name">
+        <button class="member-modal-close" type="button" aria-label="关闭" data-close-modal="true">+</button>
+        <p class="eyebrow" id="member-modal-role-label">Team Member</p>
+        <h2 id="member-modal-name">成员姓名</h2>
+        <p class="member-modal-role" id="member-modal-role">成员身份</p>
+        <p class="member-modal-text" id="member-modal-text">这里显示成员的详细介绍。</p>
+      </div>
+    </div>
+
+    <div class="gear-modal" id="gear-modal" aria-hidden="true">
+      <div class="gear-modal-backdrop" data-close-gear-modal="true"></div>
+      <div class="gear-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="gear-modal-name">
+        <button class="gear-modal-close" type="button" aria-label="关闭" data-close-gear-modal="true">+</button>
+        <div class="gear-modal-visual" id="gear-modal-visual"></div>
+        <div class="gear-modal-copy">
+          <p class="eyebrow" id="gear-modal-label">Gear Details</p>
+          <h2 id="gear-modal-name">装备名称</h2>
+          <p class="gear-modal-role" id="gear-modal-role">装备分类</p>
+          <p class="gear-modal-text" id="gear-modal-text">这里显示装备介绍说明。</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
