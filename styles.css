@@ -287,7 +287,7 @@ main {
 
 .hero-device {
   position: relative;
-  width: min(100%, 1240px);
+  width: 100%;
   margin-top: 72px;
 }
 
@@ -406,6 +406,11 @@ main {
   font-size: clamp(2.6rem, 6vw, 5.4rem);
   max-width: 12ch;
   margin: 0 auto;
+}
+
+.showcase h2,
+.contact h2 {
+  margin: 0;
 }
 
 .statement p {
@@ -652,7 +657,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 
 .gear {
@@ -664,15 +669,15 @@ main {
 }
 
 .showcase-intro {
-  text-align: center;
-  width: min(100%, 980px);
-  margin: 0 auto 40px;
+  width: 100%;
+  margin: 0 0 40px;
+  text-align: left;
 }
 
 .slider-shell {
   position: relative;
-  width: min(100%, 1240px);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   overflow: clip;
 }
 
@@ -751,6 +756,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: stretch;
 }
 
 .product-grid {
@@ -1302,6 +1308,7 @@ main {
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   align-content: center;
+  width: 100%;
 }
 
 .metric {
@@ -1329,14 +1336,16 @@ main {
 .contact {
   min-height: 100svh;
   padding: 180px 0 120px;
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .contact-text {
-  margin: 24px auto 0;
+  margin: 24px 0 0;
 }
 
 .contact-actions a {
@@ -1344,6 +1353,10 @@ main {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.03);
+}
+
+.contact-actions {
+  justify-content: flex-start;
 }
 
 @media (max-width: 980px) {
@@ -1410,9 +1423,13 @@ main {
 }
 
 @media (max-width: 720px) {
+  :root {
+    --mobile-gutter: 18px;
+  }
+
   main,
   .nav-shell {
-    width: min(calc(100% - 20px), var(--width));
+    width: min(calc(100% - (var(--mobile-gutter) * 2)), var(--width));
   }
 
   .site-header {
@@ -1507,6 +1524,7 @@ main {
   }
 
   .device-frame {
+    width: 100%;
     padding: 10px;
     border-radius: 28px;
   }
@@ -1566,6 +1584,16 @@ main {
     width: 100%;
     margin-bottom: 26px;
     text-align: left;
+  }
+
+  .statement,
+  .showcase,
+  .gear,
+  .members,
+  .metrics,
+  .contact,
+  .feature-section {
+    width: 100%;
   }
 
   .feature-stage,
