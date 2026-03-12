@@ -21,6 +21,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: "Plus Jakarta Sans", sans-serif;
   color: var(--text);
   background:
@@ -1437,6 +1438,7 @@ main {
   }
 
   .nav-shell {
+    flex-direction: column;
     padding: 12px 14px;
     border-radius: 22px;
     align-items: stretch;
@@ -1444,10 +1446,11 @@ main {
   }
 
   .brand {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .site-nav {
+    width: 100%;
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: 10px;
@@ -1469,7 +1472,7 @@ main {
   }
 
   .lang-switch {
-    align-self: center;
+    align-self: flex-start;
   }
 
   .hero {
@@ -1485,7 +1488,7 @@ main {
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 15vw, 4.6rem);
+    font-size: clamp(2.6rem, 13vw, 4rem);
   }
 
   .eyebrow {
@@ -1548,7 +1551,7 @@ main {
   .showcase h2,
   .contact h2 {
     max-width: none;
-    font-size: clamp(2.1rem, 10vw, 3.1rem);
+    font-size: clamp(1.95rem, 8.8vw, 2.8rem);
     line-height: 0.98;
   }
 
@@ -1689,10 +1692,10 @@ main {
   }
 
   .bgm-toggle {
-    right: 10px;
-    bottom: 10px;
-    padding: 10px 12px;
-    font-size: 0.75rem;
+    right: 12px;
+    bottom: 64px;
+    padding: 9px 12px;
+    font-size: 0.72rem;
   }
 
   .page-next-btn {
