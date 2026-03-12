@@ -1506,6 +1506,8 @@ main {
     padding: 4px 0;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
   }
 
   .site-nav::-webkit-scrollbar {
@@ -1548,6 +1550,19 @@ main {
   .hero h1 {
     font-size: clamp(2.2rem, 11vw, 3.2rem);
     line-height: 1.05;
+  }
+
+  .hero h1,
+  .statement h2,
+  .showcase h2,
+  .feature-copy h2,
+  .contact h2,
+  .hero-text,
+  .statement p,
+  .feature-copy p,
+  .contact-text {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .eyebrow {
@@ -1670,6 +1685,18 @@ main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .reveal[data-reveal="hero"],
+  .reveal[data-reveal="statement"],
+  .reveal[data-reveal="hero-media"],
+  .reveal[data-reveal="plans"],
+  .reveal[data-reveal="history"],
+  .reveal[data-reveal="gear"],
+  .reveal[data-reveal="members"],
+  .reveal[data-reveal="metrics"],
+  .reveal[data-reveal="contact"] {
+    transform: translateY(16px) scale(0.99);
   }
 
   .showcase,
@@ -1807,8 +1834,11 @@ main {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
     padding-bottom: 50px;
     margin-bottom: -10px;
+    max-width: 100%;
   }
 
   .slider-grid {
@@ -1912,9 +1942,7 @@ main {
   }
 
   .page-next-btn {
-    bottom: 8px;
-    width: 36px;
-    height: 36px;
+    display: none;
   }
 
   /* 联系方式 */

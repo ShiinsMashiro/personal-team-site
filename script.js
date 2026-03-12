@@ -790,6 +790,8 @@ sliderGrids.forEach((grid) => {
     touchEndX = e.changedTouches[0].screenX;
     const diff = touchStartX - touchEndX;
     const threshold = 50;
+    const visible = getVisibleCount();
+    const maxIndex = Math.max(0, cards.length - visible);
 
     if (diff > threshold && index < maxIndex) {
       index += 1;
