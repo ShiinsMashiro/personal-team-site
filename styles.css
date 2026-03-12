@@ -1397,29 +1397,64 @@ main {
   .contact {
     min-height: auto;
     padding: 104px 0 84px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .showcase,
+  .gear,
+  .members {
+    justify-content: flex-start;
+  }
+
+  .statement,
+  .contact {
+    justify-content: center;
+  }
+
+  /* 滑块容器 - 允许触摸滑动 */
+  .slider-shell {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 60px;
+    margin-bottom: -20px;
   }
 
   .slider-grid {
     --visible-cards: 1;
     --card-gap: 14px;
+    width: 100%;
+    min-width: 100%;
+    transform: none !important;
+    display: flex;
+    gap: var(--card-gap);
+  }
+
+  .slider-grid > * {
+    flex: 0 0 calc(100% - var(--card-gap));
+    min-width: calc(100% - var(--card-gap));
+    scroll-snap-align: center;
   }
 
   .slider-shell::before,
   .slider-shell::after {
-    width: 18px;
+    display: none;
   }
 
+  /* 箭头固定在底部居中 */
   .slider-control {
     top: auto;
-    bottom: -56px;
+    bottom: 0;
+    transform: translateY(0);
   }
 
   .slider-control.prev {
-    left: calc(50% - 46px);
+    left: calc(50% - 50px);
   }
 
   .slider-control.next {
-    right: calc(50% - 46px);
+    right: calc(50% - 50px);
   }
 }
 
@@ -1632,6 +1667,27 @@ main {
   .feature-section {
     width: 100%;
     padding: 60px 0 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .showcase,
+  .gear,
+  .members {
+    justify-content: flex-start;
+  }
+
+  .statement {
+    justify-content: center;
+    min-height: auto;
+    padding: 80px 0 60px;
+  }
+
+  .contact {
+    justify-content: center;
+    min-height: auto;
+    padding: 80px 0 60px;
   }
 
   .feature-stage,
@@ -1745,20 +1801,47 @@ main {
     font-size: 1.5rem;
   }
 
-  /* 轮播 */
+  /* 轮播 - 触摸滑动 */
   .slider-shell {
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 50px;
+    margin-bottom: -10px;
   }
 
   .slider-grid {
     --visible-cards: 1;
     --card-gap: 10px;
+    width: 100%;
+    min-width: 100%;
+    transform: none !important;
+    display: flex;
+    gap: var(--card-gap);
+  }
+
+  .slider-grid > * {
+    flex: 0 0 calc(100% - var(--card-gap));
+    min-width: calc(100% - var(--card-gap));
+    scroll-snap-align: center;
   }
 
   .slider-control {
     width: 36px;
     height: 36px;
-    bottom: -44px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slider-control.prev {
+    left: calc(50% - 44px);
+  }
+
+  .slider-control.next {
+    right: calc(50% - 44px);
   }
 
   /* 弹窗模态框 */

@@ -777,6 +777,28 @@ sliderGrids.forEach((grid) => {
   shell.appendChild(next);
   render();
   window.addEventListener("resize", render);
+
+  // 触摸滑动支持
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  shell.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  shell.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    const threshold = 50;
+
+    if (diff > threshold && index < maxIndex) {
+      index += 1;
+      render();
+    } else if (diff < -threshold && index > 0) {
+      index -= 1;
+      render();
+    }
+  }, { passive: true });
 });
 
 let lastWheelAt = 0;
