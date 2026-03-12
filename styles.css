@@ -1350,7 +1350,6 @@ main {
   .feature-section,
   .product-grid,
   .gear-grid,
-  .member-grid,
   .metrics {
     grid-template-columns: 1fr;
   }
@@ -1374,6 +1373,7 @@ main {
   }
 
   .statement,
+  .hero,
   .hero-media,
   .feature-section,
   .showcase,
@@ -1382,7 +1382,7 @@ main {
   .metrics,
   .contact {
     min-height: auto;
-    padding: 120px 0 88px;
+    padding: 104px 0 84px;
   }
 
   .slider-grid {
@@ -1397,7 +1397,7 @@ main {
 
   .slider-control {
     top: auto;
-    bottom: -52px;
+    bottom: -56px;
   }
 
   .slider-control.prev {
@@ -1420,37 +1420,108 @@ main {
   }
 
   .nav-shell {
-    padding: 14px 16px;
-    border-radius: 26px;
-    flex-direction: column;
-    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 22px;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .brand {
+    justify-content: center;
   }
 
   .site-nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px 18px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav a {
+    white-space: nowrap;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .lang-switch {
+    align-self: center;
   }
 
   .hero {
-    min-height: auto;
-    padding: 70px 0 72px;
+    min-height: calc(100svh - 120px);
+    padding: 64px 0 48px;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .hero-media {
     min-height: auto;
-    padding: 90px 0 72px;
+    padding: 72px 0 56px;
   }
 
   .hero h1 {
-    font-size: clamp(3.1rem, 16vw, 4.8rem);
+    font-size: clamp(3rem, 15vw, 4.6rem);
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+  }
+
+  .hero-text,
+  .statement p,
+  .feature-copy p,
+  .contact-text {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions,
+  .contact-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .button,
+  .contact-actions a {
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .hero-device {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .device-frame {
+    padding: 10px;
+    border-radius: 28px;
   }
 
   .device-screen {
-    min-height: 420px;
-    padding: 24px;
+    min-height: 560px;
+    padding: 18px 18px 20px;
+    border-radius: 22px;
     background-size: cover, cover, auto 100%, cover, cover;
     background-position: center, center, center center, center top, center;
+  }
+
+  .screen-topline {
+    padding: 8px 12px;
+    font-size: 0.74rem;
   }
 
   .screen-title,
@@ -1459,11 +1530,14 @@ main {
   .showcase h2,
   .contact h2 {
     max-width: none;
-    font-size: clamp(2.3rem, 10vw, 3.4rem);
+    font-size: clamp(2.1rem, 10vw, 3.1rem);
+    line-height: 0.98;
   }
 
   .screen-title {
     margin-left: 0;
+    margin-bottom: 16px;
+    max-width: 7ch;
     text-align: left;
   }
 
@@ -1471,21 +1545,130 @@ main {
     justify-content: flex-start;
     margin-left: 0;
     max-width: none;
+    gap: 8px;
+  }
+
+  .screen-grid span {
+    padding: 8px 10px;
+    font-size: 0.76rem;
   }
 
   .spotlight-panel,
   .product-panel,
+  .metric,
+  .gear-card,
+  .member-card {
+    border-radius: 22px;
+  }
+
+  .showcase-intro,
+  .feature-copy {
+    width: 100%;
+    margin-bottom: 26px;
+    text-align: left;
+  }
+
+  .feature-stage,
+  .member-grid,
+  .metrics {
+    width: 100%;
+  }
+
+  .feature-stage {
+    gap: 14px;
+  }
+
+  .spotlight-panel,
+  .product-panel,
+  .gear-card,
+  .member-card,
   .metric {
-    border-radius: 24px;
+    min-height: 0;
+    padding: 22px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  }
+
+  .product-panel h3,
+  .spotlight-panel h3,
+  .gear-card h3,
+  .member-card h3 {
+    font-size: 1.55rem;
+    margin: 10px 0 8px;
+  }
+
+  .product-panel span,
+  .spotlight-panel p,
+  .gear-card span,
+  .member-card p,
+  .metric span {
+    line-height: 1.5;
+    font-size: 0.94rem;
+  }
+
+  .gear-card-large {
+    min-height: 380px;
+  }
+
+  .member-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .member-card {
+    min-height: 240px;
+    padding: 18px;
+  }
+
+  .member-card-content {
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+  }
+
+  .member-card h3 {
+    font-size: 1.28rem;
+  }
+
+  .member-card p {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .metric {
+    text-align: left;
+  }
+
+  .metric strong {
+    margin-bottom: 8px;
+    font-size: 1.8rem;
+  }
+
+  .slider-shell {
+    width: 100%;
+  }
+
+  .slider-control {
+    width: 42px;
+    height: 42px;
+    bottom: -54px;
   }
 
   .bgm-toggle {
-    right: 12px;
-    bottom: 12px;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px 12px;
+    font-size: 0.75rem;
   }
 
   .page-next-btn {
-    bottom: 12px;
+    bottom: 10px;
     width: 42px;
     height: 42px;
   }
