@@ -1442,7 +1442,7 @@ main {
     display: none;
   }
 
-  /* 箭头固定在底部居中 - 只显示右箭头 */
+  /* 箭头固定在底部居中 */
   .slider-control {
     top: auto;
     bottom: 0;
@@ -1450,17 +1450,17 @@ main {
   }
 
   .slider-control.prev {
-    display: none;
+    left: calc(50% - 50px);
   }
 
   .slider-control.next {
-    right: calc(50% - 22px);
+    right: calc(50% - 50px);
   }
 }
 
 @media (max-width: 720px) {
   :root {
-    --mobile-gutter: 16px;
+    --mobile-gutter: 14px;
   }
 
   main,
@@ -1468,17 +1468,17 @@ main {
     width: calc(100% - (var(--mobile-gutter) * 2));
   }
 
-  /* Header 优化 - 紧凑型 */
+  /* Header 优化 - 改为紧凑型 */
   .site-header {
-    padding: 6px 0;
+    padding: 8px 0;
   }
 
   .nav-shell {
     flex-direction: column;
-    padding: 8px 10px;
-    border-radius: 12px;
+    padding: 10px 12px;
+    border-radius: 16px;
     align-items: stretch;
-    gap: 6px;
+    gap: 8px;
   }
 
   .brand {
@@ -1487,23 +1487,23 @@ main {
   }
 
   .brand-mark {
-    width: 26px;
-    height: 26px;
-    font-size: 0.65rem;
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
   }
 
   #brand-text {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 
-  /* 导航横向滚动 */
+  /* 导航改为横向滚动 */
   .site-nav {
     width: 100%;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 4px;
+    gap: 6px;
     overflow-x: auto;
-    padding: 2px 0;
+    padding: 4px 0;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
@@ -1514,60 +1514,54 @@ main {
 
   .site-nav a {
     white-space: nowrap;
-    padding: 5px 8px;
-    font-size: 0.72rem;
-    border: none;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 999px;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.02);
     color: var(--muted);
   }
 
   .lang-switch {
     align-self: flex-start;
-    padding: 2px;
+    padding: 3px;
   }
 
   .lang-btn {
-    padding: 4px 6px;
-    font-size: 0.68rem;
+    padding: 5px 8px;
+    font-size: 0.72rem;
   }
 
-  /* Hero 区域 - 紧凑 */
+  /* Hero 区域 */
   .hero {
-    min-height: calc(100svh - 80px);
-    padding: 32px 0 24px;
+    min-height: calc(100svh - 100px);
+    padding: 48px 0 32px;
     align-items: flex-start;
     text-align: left;
-    justify-content: flex-start;
   }
 
   .hero-media {
     min-height: auto;
-    padding: 32px 0 24px;
+    padding: 48px 0 40px;
   }
 
   .hero h1 {
-    font-size: clamp(1.8rem, 9vw, 2.6rem);
-    line-height: 1.1;
+    font-size: clamp(2.2rem, 11vw, 3.2rem);
+    line-height: 1.05;
   }
 
   .eyebrow {
-    margin-bottom: 8px;
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
   }
 
-  .hero-text {
-    margin-top: 16px;
-    font-size: 0.88rem;
-    line-height: 1.5;
-  }
-
+  .hero-text,
   .statement p,
   .feature-copy p,
   .contact-text {
-    font-size: 0.88rem;
-    line-height: 1.55;
+    font-size: 0.92rem;
+    line-height: 1.6;
   }
 
   /* 按钮全宽 */
@@ -1576,8 +1570,8 @@ main {
     width: 100%;
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
-    margin-top: 16px;
+    gap: 8px;
+    margin-top: 20px;
   }
 
   .button,
@@ -1585,95 +1579,83 @@ main {
     width: 100%;
     min-width: 0;
     text-align: center;
-    padding: 10px 16px;
-    font-size: 0.85rem;
+    padding: 12px 18px;
+    font-size: 0.92rem;
   }
 
-  /* 设备框架 - 缩小 */
+  /* 设备框架 */
   .hero-device {
     margin-top: 0;
     width: 100%;
   }
 
   .device-glow {
-    inset: 6% 8% auto;
-    height: 120px;
+    inset: 8% 12% auto;
+    height: 180px;
   }
 
   .device-frame {
     width: 100%;
-    padding: 6px;
-    border-radius: 14px;
+    padding: 8px;
+    border-radius: 20px;
   }
 
   .device-screen {
-    min-height: 320px;
-    padding: 10px 12px 12px;
-    border-radius: 10px;
+    min-height: 420px;
+    padding: 14px 14px 16px;
+    border-radius: 16px;
     background-size: cover, cover, auto 100%, cover, cover;
     background-position: center, center, center center, center top, center;
   }
 
   .screen-topline {
-    padding: 5px 8px;
-    font-size: 0.6rem;
+    padding: 6px 10px;
+    font-size: 0.68rem;
   }
 
-  .screen-title {
-    margin-left: 0;
-    margin-bottom: 8px;
-    max-width: 10ch;
-    text-align: left;
-    font-size: clamp(1.4rem, 5vw, 1.8rem);
-    line-height: 1.05;
-  }
-
+  .screen-title,
   .feature-copy h2,
   .statement h2,
   .showcase h2,
   .contact h2 {
     max-width: none;
-    font-size: clamp(1.4rem, 6vw, 1.8rem);
-    line-height: 1.1;
+    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
+    line-height: 1.02;
+  }
+
+  .screen-title {
+    margin-left: 0;
+    margin-bottom: 12px;
+    max-width: 8ch;
+    text-align: left;
   }
 
   .screen-grid {
     justify-content: flex-start;
     margin-left: 0;
     max-width: none;
-    gap: 4px;
+    gap: 6px;
   }
 
   .screen-grid span {
-    padding: 4px 6px;
-    font-size: 0.6rem;
+    padding: 6px 8px;
+    font-size: 0.68rem;
   }
 
-  /* 通用区块 - 紧凑 */
+  /* 通用卡片 */
   .spotlight-panel,
   .product-panel,
   .metric,
   .gear-card,
   .member-card {
-    border-radius: 12px;
+    border-radius: 16px;
   }
 
   .showcase-intro,
   .feature-copy {
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     text-align: left;
-  }
-
-  .showcase-intro .eyebrow,
-  .feature-copy .eyebrow {
-    margin-bottom: 6px;
-  }
-
-  .showcase-intro h2,
-  .feature-copy h2 {
-    font-size: clamp(1.3rem, 5.5vw, 1.6rem);
-    line-height: 1.15;
   }
 
   .statement,
@@ -1684,11 +1666,10 @@ main {
   .contact,
   .feature-section {
     width: 100%;
-    padding: 40px 0 32px;
+    padding: 60px 0 48px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    min-height: auto;
   }
 
   .showcase,
@@ -1697,10 +1678,16 @@ main {
     justify-content: flex-start;
   }
 
-  .statement,
+  .statement {
+    justify-content: center;
+    min-height: auto;
+    padding: 80px 0 60px;
+  }
+
   .contact {
     justify-content: center;
-    padding: 48px 0 36px;
+    min-height: auto;
+    padding: 80px 0 60px;
   }
 
   .feature-stage,
@@ -1710,7 +1697,7 @@ main {
   }
 
   .feature-stage {
-    gap: 10px;
+    gap: 12px;
   }
 
   .spotlight-panel,
@@ -1719,16 +1706,16 @@ main {
   .member-card,
   .metric {
     min-height: auto;
-    padding: 12px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+    padding: 16px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
   }
 
   .product-panel h3,
   .spotlight-panel h3,
   .gear-card h3,
   .member-card h3 {
-    font-size: 1rem;
-    margin: 6px 0 4px;
+    font-size: 1.25rem;
+    margin: 8px 0 6px;
   }
 
   .product-panel span,
@@ -1736,33 +1723,27 @@ main {
   .gear-card span,
   .member-card p,
   .metric span {
-    line-height: 1.4;
-    font-size: 0.78rem;
+    line-height: 1.45;
+    font-size: 0.84rem;
   }
 
-  /* 装备卡片 - 紧凑 */
+  /* 装备卡片 */
   .gear-card {
-    min-height: 140px;
-    padding: 10px;
+    min-height: 200px;
+    padding: 14px;
   }
 
   .gear-card-large {
-    min-height: 180px;
+    min-height: 260px;
   }
 
   .gear-card p {
-    font-size: 0.62rem;
-    margin-bottom: 4px;
+    font-size: 0.72rem;
+    margin-bottom: 8px;
   }
 
   .gear-card h3 {
-    font-size: 0.95rem;
-    margin-bottom: 2px;
-  }
-
-  .gear-card span {
-    font-size: 0.72rem;
-  }
+    font-size: 1.2rem;
   }
 
   .gear-card span {
@@ -1773,51 +1754,51 @@ main {
   .member-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 10px;
   }
 
   .member-card {
-    min-height: 120px;
-    padding: 10px;
-    border-radius: 10px;
+    min-height: 180px;
+    padding: 12px;
+    border-radius: 14px;
   }
 
   .member-card-content {
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
   }
 
   .member-card h3 {
-    font-size: 0.9rem;
-    margin-bottom: 2px;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
   }
 
   .member-card p {
-    font-size: 0.62rem;
-    line-height: 1.25;
+    font-size: 0.72rem;
+    line-height: 1.3;
     max-width: none;
   }
 
   .member-index {
-    font-size: 0.6rem;
+    font-size: 0.72rem;
   }
 
   /* Metrics - 1列 */
   .metrics {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
   .metric {
     text-align: left;
-    padding: 10px 12px;
+    padding: 14px 16px;
   }
 
   .metric strong {
-    margin-bottom: 2px;
-    font-size: 1.2rem;
+    margin-bottom: 4px;
+    font-size: 1.5rem;
   }
 
   /* 轮播 - 触摸滑动 */
@@ -1826,13 +1807,13 @@ main {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding-bottom: 40px;
-    margin-bottom: -8px;
+    padding-bottom: 50px;
+    margin-bottom: -10px;
   }
 
   .slider-grid {
     --visible-cards: 1;
-    --card-gap: 8px;
+    --card-gap: 10px;
     width: 100%;
     min-width: 100%;
     transform: none !important;
@@ -1847,21 +1828,20 @@ main {
   }
 
   .slider-control {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
   }
 
   .slider-control.prev {
-    display: none;
+    left: calc(50% - 44px);
   }
 
   .slider-control.next {
-    right: calc(50% - 16px);
+    right: calc(50% - 44px);
   }
 
   /* 弹窗模态框 */
@@ -1869,86 +1849,86 @@ main {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: 16px;
-    border-radius: 12px;
-    max-height: 85vh;
+    padding: 20px;
+    border-radius: 16px;
+    max-height: 90vh;
     overflow-y: auto;
   }
 
   .member-modal-close {
-    top: 10px;
-    right: 10px;
-    width: 28px;
-    height: 28px;
-    font-size: 1.1rem;
-  }
-
-  .member-modal-dialog h2 {
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
     font-size: 1.3rem;
   }
 
+  .member-modal-dialog h2 {
+    font-size: 1.6rem;
+  }
+
   .member-modal-role {
-    font-size: 0.82rem;
-    margin: 6px 0 4px;
+    font-size: 0.94rem;
+    margin: 10px 0 8px;
   }
 
   .member-modal-text {
-    font-size: 0.8rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 
   .gear-modal-dialog {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    border-radius: 12px;
+    border-radius: 16px;
     max-height: 90vh;
     overflow-y: auto;
   }
 
   .gear-modal-visual {
-    min-height: 140px;
+    min-height: 180px;
   }
 
   .gear-modal-copy {
-    padding: 12px;
+    padding: 16px;
   }
 
   .gear-modal-close {
-    top: 10px;
-    right: 10px;
-    width: 28px;
-    height: 28px;
-    font-size: 1.1rem;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 1.3rem;
   }
 
   /* BGM 按钮 */
   .bgm-toggle {
-    right: 8px;
-    bottom: 48px;
-    padding: 6px 8px;
-    font-size: 0.62rem;
-    min-width: 60px;
+    right: 10px;
+    bottom: 56px;
+    padding: 8px 10px;
+    font-size: 0.68rem;
+    min-width: 80px;
   }
 
   .page-next-btn {
-    bottom: 6px;
-    width: 28px;
-    height: 28px;
+    bottom: 8px;
+    width: 36px;
+    height: 36px;
   }
 
   /* 联系方式 */
   .contact h2 {
-    font-size: clamp(1.2rem, 5vw, 1.4rem);
+    font-size: clamp(1.4rem, 6.5vw, 1.8rem);
   }
 
   .contact-text {
-    margin: 10px 0 0;
+    margin: 14px 0 0;
   }
 
   .contact-actions a {
-    padding: 8px 12px;
-    font-size: 0.78rem;
+    padding: 10px 14px;
+    font-size: 0.85rem;
   }
 
   /* 计划卡片 */
@@ -1957,30 +1937,24 @@ main {
   }
 
   .product-panel {
-    min-height: 140px;
-  }
-
-  .panel-wide {
     min-height: 180px;
   }
 
-  .product-panel p {
-    font-size: 0.62rem;
-    margin-bottom: 4px;
+  .panel-wide {
+    min-height: 240px;
   }
 
   /* 履历卡片 */
   .spotlight-panel span {
-    font-size: 0.6rem;
+    font-size: 0.72rem;
   }
 
   .spotlight-panel h3 {
-    font-size: 0.95rem;
-    margin: 4px 0 3px;
+    font-size: 1.1rem;
   }
 
   .spotlight-panel p {
-    font-size: 0.72rem;
-    line-height: 1.4;
+    font-size: 0.82rem;
+    line-height: 1.5;
   }
 }
