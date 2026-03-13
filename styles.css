@@ -1997,8 +1997,8 @@ main {
   }
 
   .slider-grid > * {
-    flex: 0 0 100%;
-    min-width: 100%;
+    flex: 0 0 var(--card-width-px);
+    min-width: var(--card-width-px);
   }
 
   .slider-shell::before,
@@ -2146,8 +2146,8 @@ main {
   }
 
   .hero h1 {
-    font-size: clamp(1.7rem, 7vw, 2.3rem);
-    line-height: 1.05;
+    font-size: clamp(1.05rem, 4.6vw, 1.38rem);
+    line-height: 1.08;
     white-space: normal;
   }
 
@@ -2471,11 +2471,12 @@ main {
     --card-gap: 10px;
     width: max-content;
     min-width: 100%;
+    transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .slider-grid > * {
-    flex: 0 0 calc(100% - var(--card-gap));
-    min-width: calc(100% - var(--card-gap));
+    flex: 0 0 var(--card-width-px);
+    min-width: var(--card-width-px);
   }
 
   .slider-control {
@@ -2486,6 +2487,7 @@ main {
     align-items: center;
     justify-content: center;
     z-index: 8;
+    touch-action: manipulation;
   }
 
   .slider-control.prev {
