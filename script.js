@@ -27,8 +27,8 @@ const storySlides = Array.from(document.querySelectorAll("[data-story-slide]"));
 const storyPrev = document.querySelector("#story-prev");
 const storyNext = document.querySelector("#story-next");
 const bgmSources = {
-  zh: "./source/audio/kala-yongyuan-ok.mp3",
-  en: "./source/audio/bgm.mp3",
+  zh: "./source/audio/不凡.mp3",
+  en: "./source/audio/birthday.mp3",
 };
 
 let currentLanguage = localStorage.getItem("etu-language") || "en";

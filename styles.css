@@ -1167,6 +1167,11 @@ main {
   align-items: stretch;
 }
 
+#members-title {
+  white-space: nowrap;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr;
@@ -1366,6 +1371,7 @@ main {
   z-index: 1;
   color: var(--muted);
   line-height: 1.8;
+  display: none;
 }
 
 .member-grid {
@@ -2580,8 +2586,15 @@ main {
   /* 联系方式 */
   .contact {
     min-height: 100svh;
-    padding: 96px 0 84px;
+    padding: 72px 0 84px;
     justify-content: flex-end;
+  }
+
+  .contact::before {
+    background-position: center center, center 14%, center 28%;
+    background-size: auto, auto, contain;
+    opacity: 0.34;
+    filter: brightness(0.62) saturate(0.88);
   }
 
   .contact h2 {
@@ -2595,13 +2608,21 @@ main {
   }
 
   .contact-actions {
+    margin-top: auto;
     gap: 10px;
     width: 100%;
+    padding-top: 22px;
   }
 
   .contact-actions a {
     padding: 12px 14px;
     font-size: 0.95rem;
+  }
+
+  #members-title {
+    white-space: nowrap;
+    font-size: clamp(1.2rem, 5vw, 1.55rem);
+    letter-spacing: -0.04em;
   }
 
   /* 计划卡片 */
