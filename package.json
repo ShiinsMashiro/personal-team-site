@@ -1,0 +1,8 @@
+{
+  "name": "personal-team-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "deploy:pages": "wrangler pages deploy . --project-name=personal-team-site"
+  }
+}
