@@ -1,0 +1,7 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "pages": {
+    "project_name": "personal-team-site",
+    "compatibility_date": "2025-09-27"
+  }
+}
