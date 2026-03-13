@@ -58,7 +58,8 @@ const content = {
     navGear: "装备",
     navMembers: "成员",
     navContact: "联系",
-    heroEyebrow: "Explore The Unseen",
+    heroEyebrow:
+      '<span class="hero-brand-top">EXPLORE</span><span class="hero-brand-bottom"><span>THE</span><span>UNSEEN</span></span>',
     heroTitle: "去那些尚未被语言完全命名的地方。",
     heroText: "冷静进入未知。<br />克制抵达高处。",
     heroButtonPlans: "查看计划",
@@ -217,7 +218,8 @@ const content = {
     navGear: "Gear",
     navMembers: "Members",
     navContact: "Contact",
-    heroEyebrow: "Explore The Unseen",
+    heroEyebrow:
+      '<span class="hero-brand-top">EXPLORE</span><span class="hero-brand-bottom"><span>THE</span><span>UNSEEN</span></span>',
     heroTitle: "Go where language has not finished naming.",
     heroText: "Enter the unknown calmly.<br />Reach higher with restraint.",
     heroButtonPlans: "View plans",
@@ -421,7 +423,7 @@ const applyLanguage = async (lang) => {
   setText("nav-gear", copy.navGear);
   setText("nav-members", copy.navMembers);
   setText("nav-contact", copy.navContact);
-  setText("hero-eyebrow", copy.heroEyebrow);
+  setText("hero-eyebrow", copy.heroEyebrow, true);
   setText("hero-title", copy.heroTitle, true);
   setText("hero-text", copy.heroText, true);
   setText("hero-button-plans", copy.heroButtonPlans);

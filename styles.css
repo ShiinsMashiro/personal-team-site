@@ -306,10 +306,32 @@ main {
   font-weight: 900;
   letter-spacing: 0.01em;
   line-height: 1.08;
-  white-space: nowrap;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.72);
-  transform: scaleX(1.08) scaleY(1.12);
+  transform: scaleY(1.12);
   transform-origin: center bottom;
+  width: min(100%, 980px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.08em;
+}
+
+#hero-eyebrow .hero-brand-top {
+  display: block;
+  text-align: center;
+}
+
+#hero-eyebrow .hero-brand-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  width: auto;
+  gap: 0.45em;
+  align-self: center;
+}
+
+#hero-eyebrow .hero-brand-bottom span {
+  display: block;
 }
 
 .hero-text,
@@ -685,14 +707,14 @@ main {
   inset: 0;
   background-color: #000;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.42)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
     radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.12), transparent 28%),
     url("./members/huang1.png");
   background-repeat: no-repeat;
   background-position: center center, center 16%, center 68%;
   background-size: auto, auto, contain;
-  opacity: 0.5;
-  filter: brightness(0.88) saturate(0.92);
+  opacity: 0.42;
+  filter: brightness(0.72) saturate(0.9);
   z-index: 0;
 }
 
@@ -2134,6 +2156,10 @@ main {
     margin: 0 0 6px;
     font-size: 1.35rem;
     letter-spacing: 0.1em;
+  }
+
+  #hero-eyebrow .hero-brand-bottom {
+    gap: 0.4em;
   }
 
   .hero h1,
