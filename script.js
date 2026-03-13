@@ -14,14 +14,18 @@ const gearModalVisual = document.querySelector("#gear-modal-visual");
 const gearModalCloseTargets = document.querySelectorAll("[data-close-gear-modal='true']");
 const bgmAudio = document.querySelector("#bgm-audio");
 const bgmToggle = document.querySelector("#bgm-toggle");
+const pageTopBtn = document.querySelector("#page-top-btn");
 const langButtons = document.querySelectorAll(".lang-btn");
 const interactivePanels = document.querySelectorAll(
-  ".product-panel, .spotlight-panel, .gear-card, .member-card, .metric"
+  ".showcase-intro, .feature-copy, .product-panel, .spotlight-panel, .gear-card, .member-card, .metric"
 );
 const pageSections = Array.from(document.querySelectorAll("main > section.reveal"));
 const siteHeader = document.querySelector(".site-header");
 const sliderGrids = document.querySelectorAll(".slider-grid[data-slider]");
 const metaDescription = document.querySelector("#meta-description");
+const storySlides = Array.from(document.querySelectorAll("[data-story-slide]"));
+const storyPrev = document.querySelector("#story-prev");
+const storyNext = document.querySelector("#story-next");
 const bgmSources = {
   zh: "./source/audio/kala-yongyuan-ok.mp3",
   en: "./source/audio/bgm.mp3",
@@ -30,6 +34,11 @@ const bgmSources = {
 let currentLanguage = localStorage.getItem("etu-language") || "en";
 let currentMemberKey = null;
 let currentGearKey = null;
+let currentStorySlide = 1;
+
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
 
 const content = {
   zh: {
@@ -50,20 +59,23 @@ const content = {
     navMembers: "成员",
     navContact: "联系",
     heroEyebrow: "Explore The Unseen",
-    heroTitle: "去那些尚未被语言<br />完全命名的地方。",
+    heroTitle: "去那些尚未被语言完全命名的地方。",
     heroText: "冷静进入未知。<br />克制抵达高处。",
     heroButtonPlans: "查看计划",
     heroButtonMembers: "成员档案",
     screenTopline: "Explore The Unseen",
-    screenTitle: "命名之外，仍有海拔。",
-    screenGrid1: "4 位成员",
+    screenTitle: "命名之外，<br />仍有海拔。",
+    screenGrid1: "7 位成员",
     screenGrid2: "4 个目标",
     screenGrid3: "下一次上升",
-    storyEyebrow: "团队叙事",
-    storyTitle: "四个人。 一套秩序。 向未被看清之地稳定推进。",
-    storyText: "判断、配速、补给、协作。",
+    storyEyebrow: "",
+    storyTitle: "TEAM",
+    storyText: "",
+    storyEyebrow2: "",
+    storyTitle2: "<span class=\"title-accent\">N</span>EW TEAM",
+    storyText2: "",
     plansEyebrow: "未来计划",
-    plansTitle: "下一座山，决定当下准备。",
+    plansTitle: "下一座山，<br />决定当下准备。",
     plan1Name: "秦岭",
     plan1Title: "主计划。",
     plan1Text: "纵深山系，连续判断。",
@@ -77,7 +89,7 @@ const content = {
     plan4Title: "进入险峻地形。",
     plan4Text: "稳定动作，稳定判断。",
     historyEyebrow: "过往履历",
-    historyTitle: "走过的地方，只为下一次出发作证。",
+    historyTitle: "走过的地方，<br />只为下一次出发作证。",
     historyText: "它们不是终点，只是方法的记录。",
     history1Title: "金华大盘尖穿越",
     history1Text: "古道、山脊、长距离推进。",
@@ -100,7 +112,7 @@ const content = {
     gear4Title: "续航管理系统。",
     gear4Text: "续航系统。",
     membersEyebrow: "成员档案",
-    membersTitle: "四个人。四种能力。一个系统。",
+    membersTitle: "七个人。七种能力。一个系统。",
     member1Name: "谢弘毅",
     member1Role: "领队主轴 / 公职气质的秩序建立者",
     member2Name: "陈云哲",
@@ -109,11 +121,20 @@ const content = {
     member3Role: "影像记录 / 技术与情趣的提炼者",
     member4Name: "姜伟杨",
     member4Role: "补给安全 / 稳定续航的守护者",
-    metric1: "已完成路线",
-    metric2: "长期成员",
-    metric3: "当前计划中的目标方向",
+    member5Name: "徐丹宁",
+    member5Role: "伟大的教育家 / 徐校长",
+    member6Name: "富贵",
+    member6Role: "开疆扩土的先锋 / 最忠诚的卫士",
+    member7Name: "李昕怡",
+    member7Role: "氛围管家 / 团队活力的调节者",
+    metricValue1: "眼里是山，那就不好走。",
+    metricValue2: "",
+    metricValue3: "眼里是景，就好走。",
+    metric1: "",
+    metric2: "",
+    metric3: "",
     contactEyebrow: "联系",
-    contactTitle: "联系 Explore The Unseen。",
+    contactTitle: "联系 <span class=\"brand-accent\">Explore The Unseen</span>。",
     contactText: "微信、邮箱与电话均为真实联系方式。",
     contactWechat: "微信：htjl17706403360",
     memberModalLabel: "成员档案",
@@ -138,6 +159,21 @@ const content = {
         name: "姜伟杨",
         role: "补给安全 / 稳定续航的守护者",
         text: "负责补给、照应与续航稳定。",
+      },
+      placeholder1: {
+        name: "徐丹宁",
+        role: "伟大的教育家 / 徐校长",
+        text: "以教育者的判断与定力，为团队提供另一种稳定的秩序感。",
+      },
+      placeholder2: {
+        name: "富贵",
+        role: "开疆扩土的先锋 / 最忠诚的卫士",
+        text: "承担开路、陪伴与守望的角色，是队伍里最直接也最忠诚的存在。",
+      },
+      placeholder3: {
+        name: "李昕怡",
+        role: "氛围管家 / 团队活力的调节者",
+        text: "负责沟通、激励与氛围调节，让队伍在行进中保持稳定的情绪与活力。",
       },
     },
     gearDetails: {
@@ -181,20 +217,23 @@ const content = {
     navMembers: "Members",
     navContact: "Contact",
     heroEyebrow: "Explore The Unseen",
-    heroTitle: "Go where language<br />has not finished naming.",
+    heroTitle: "Go where language has not finished naming.",
     heroText: "Enter the unknown calmly.<br />Reach higher with restraint.",
     heroButtonPlans: "View plans",
     heroButtonMembers: "Member files",
     screenTopline: "Explore The Unseen",
-    screenTitle: "Beyond the named trail, there is still altitude.",
-    screenGrid1: "4 Members",
+    screenTitle: "Beyond the named trail,<br />there is still<br />altitude.",
+    screenGrid1: "7 Members",
     screenGrid2: "4 Targets",
     screenGrid3: "Next Ascent",
-    storyEyebrow: "About The Team",
-    storyTitle: "Four people. One order. A steady push toward what remains unnamed.",
-    storyText: "Judgment, pace, supply, coordination.",
+    storyEyebrow: "",
+    storyTitle: "TEAM",
+    storyText: "",
+    storyEyebrow2: "",
+    storyTitle2: "<span class=\"title-accent\">N</span>EW TEAM",
+    storyText2: "",
     plansEyebrow: "Future Plans",
-    plansTitle: "The next mountain shapes the preparation.",
+    plansTitle: "The next mountain<br />shapes the preparation.",
     plan1Name: "Qinling",
     plan1Title: "Primary objective.",
     plan1Text: "Deep mountain system. Continuous judgment.",
@@ -208,7 +247,7 @@ const content = {
     plan4Title: "Enter exposed terrain.",
     plan4Text: "Steady movement. Steady decisions.",
     historyEyebrow: "Completed Routes",
-    historyTitle: "Past routes are proof for the next departure.",
+    historyTitle: "Past routes are proof<br />for the next departure.",
     historyText: "Not endpoints. Just records of method.",
     history1Title: "Jinhua Dapanjian Traverse",
     history1Text: "Old trails, ridgelines, long movement.",
@@ -231,7 +270,7 @@ const content = {
     gear4Title: "Endurance management.",
     gear4Text: "Sustainment.",
     membersEyebrow: "Team Members",
-    membersTitle: "Four people. Four capabilities. One system.",
+    membersTitle: "Seven people. Seven capabilities. One system.",
     member1Name: "Xie Hongyi",
     member1Role: "Lead axis / Builder of order",
     member2Name: "Chen Yunzhe",
@@ -240,12 +279,21 @@ const content = {
     member3Role: "Image record / Interpreter of technique and tone",
     member4Name: "Jiang Weiyang",
     member4Role: "Supply and safety / Guardian of steady endurance",
-    metric1: "Routes completed",
-    metric2: "Core members",
-    metric3: "Planned objectives",
+    member5Name: "Xu Danning",
+    member5Role: "Great Educator / Principal Xu",
+    member6Name: "Fugui",
+    member6Role: "Pioneer of expansion / Most loyal guardian",
+    member7Name: "Li Xinyi",
+    member7Role: "Atmosphere steward / Regulator of team energy",
+    metricValue1: "Eyes on the mountain, and the walk gets hard.",
+    metricValue2: "",
+    metricValue3: "Eyes on the view, and it goes easier.",
+    metric1: "",
+    metric2: "",
+    metric3: "",
     contactEyebrow: "Contact",
-    contactTitle: "Contact Explore The Unseen.",
-    contactText: "WeChat, email, and phone are active contact channels.",
+    contactTitle: "Contact <span class=\"brand-accent\">Explore The Unseen</span>.",
+    contactText: "",
     contactWechat: "WeChat: htjl17706403360",
     memberModalLabel: "Team Member",
     gearModalLabel: "Gear Details",
@@ -269,6 +317,21 @@ const content = {
         name: "Jiang Weiyang",
         role: "Supply and safety / Guardian of steady endurance",
         text: "Handles supply, support, and endurance.",
+      },
+      placeholder1: {
+        name: "Xu Danning",
+        role: "Great Educator / Principal Xu",
+        text: "Brings the steadiness and clarity of an educator into the team's field rhythm.",
+      },
+      placeholder2: {
+        name: "Fugui",
+        role: "Pioneer of expansion / Most loyal guardian",
+        text: "Carries the energy of a pathfinder and the instinct of a constant guardian.",
+      },
+      placeholder3: {
+        name: "Li Xinyi",
+        role: "Atmosphere steward / Regulator of team energy",
+        text: "Handles communication, motivation, and mood, keeping the team steady and alive on the move.",
       },
     },
     gearDetails: {
@@ -362,15 +425,18 @@ const applyLanguage = async (lang) => {
   setText("hero-button-plans", copy.heroButtonPlans);
   setText("hero-button-members", copy.heroButtonMembers);
   setText("screen-topline", copy.screenTopline);
-  setText("screen-title", copy.screenTitle);
+  setText("screen-title", copy.screenTitle, true);
   setText("screen-grid-1", copy.screenGrid1);
   setText("screen-grid-2", copy.screenGrid2);
   setText("screen-grid-3", copy.screenGrid3);
   setText("story-eyebrow", copy.storyEyebrow);
-  setText("story-title", copy.storyTitle);
+  setText("story-title", copy.storyTitle, true);
   setText("story-text", copy.storyText);
+  setText("story-eyebrow-2", copy.storyEyebrow2);
+  setText("story-title-2", copy.storyTitle2, true);
+  setText("story-text-2", copy.storyText2);
   setText("plans-eyebrow", copy.plansEyebrow);
-  setText("plans-title", copy.plansTitle);
+  setText("plans-title", copy.plansTitle, true);
   setText("plan-1-name", copy.plan1Name);
   setText("plan-1-title", copy.plan1Title);
   setText("plan-1-text", copy.plan1Text);
@@ -384,7 +450,7 @@ const applyLanguage = async (lang) => {
   setText("plan-4-title", copy.plan4Title);
   setText("plan-4-text", copy.plan4Text);
   setText("history-eyebrow", copy.historyEyebrow);
-  setText("history-title", copy.historyTitle);
+  setText("history-title", copy.historyTitle, true);
   setText("history-text", copy.historyText);
   setText("history-1-title", copy.history1Title);
   setText("history-1-text", copy.history1Text);
@@ -416,11 +482,20 @@ const applyLanguage = async (lang) => {
   setText("member-3-role", copy.member3Role);
   setText("member-4-name", copy.member4Name);
   setText("member-4-role", copy.member4Role);
+  setText("member-5-name", copy.member5Name);
+  setText("member-5-role", copy.member5Role);
+  setText("member-6-name", copy.member6Name);
+  setText("member-6-role", copy.member6Role);
+  setText("member-7-name", copy.member7Name);
+  setText("member-7-role", copy.member7Role);
+  setText("metric-value-1", copy.metricValue1);
+  setText("metric-value-2", copy.metricValue2);
+  setText("metric-value-3", copy.metricValue3);
   setText("metric-1", copy.metric1);
   setText("metric-2", copy.metric2);
   setText("metric-3", copy.metric3);
   setText("contact-eyebrow", copy.contactEyebrow);
-  setText("contact-title", copy.contactTitle);
+  setText("contact-title", copy.contactTitle, true);
   setText("contact-text", copy.contactText);
   setText("contact-wechat", copy.contactWechat);
   setText("member-modal-role-label", copy.memberModalLabel);
@@ -429,6 +504,12 @@ const applyLanguage = async (lang) => {
   document.querySelectorAll(".page-next-btn").forEach((btn) => {
     btn.setAttribute("aria-label", copy.pageNext);
   });
+  if (storyPrev) {
+    storyPrev.setAttribute("aria-label", copy.sliderPrev);
+  }
+  if (storyNext) {
+    storyNext.setAttribute("aria-label", copy.sliderNext);
+  }
   document.querySelectorAll(".slider-control.prev").forEach((btn) => {
     btn.setAttribute("aria-label", copy.sliderPrev);
   });
@@ -683,10 +764,43 @@ const scrollToSection = (index) => {
     return;
   }
 
+  if (index === 0) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    return;
+  }
+
   window.scrollTo({
     top: getCenteredScrollTop(target),
     behavior: "smooth",
   });
+};
+
+const updatePageTopButton = () => {
+  if (!pageTopBtn) {
+    return;
+  }
+
+  pageTopBtn.classList.toggle("is-visible", window.scrollY > window.innerHeight * 0.6);
+};
+
+const resetToTopOnEntry = () => {
+  if (window.location.hash) {
+    history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+  }
+
+  window.scrollTo(0, 0);
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+  });
+  window.setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 80);
+  window.setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 220);
 };
 
 const getCurrentSectionIndex = () => {
@@ -706,6 +820,16 @@ const getCurrentSectionIndex = () => {
   return closestIndex;
 };
 
+const renderStorySlides = () => {
+  if (!storySlides.length) {
+    return;
+  }
+
+  storySlides.forEach((slide, index) => {
+    slide.classList.toggle("is-active", index === currentStorySlide);
+  });
+};
+
 pageSections.forEach((section, index) => {
   if (index >= pageSections.length - 1) {
     return;
@@ -721,6 +845,20 @@ pageSections.forEach((section, index) => {
   section.appendChild(btn);
 });
 
+if (storyPrev && storyNext && storySlides.length) {
+  storyPrev.addEventListener("click", () => {
+    currentStorySlide = currentStorySlide <= 0 ? storySlides.length - 1 : currentStorySlide - 1;
+    renderStorySlides();
+  });
+
+  storyNext.addEventListener("click", () => {
+    currentStorySlide = currentStorySlide >= storySlides.length - 1 ? 0 : currentStorySlide + 1;
+    renderStorySlides();
+  });
+
+  renderStorySlides();
+}
+
 sliderGrids.forEach((grid) => {
   const cards = Array.from(grid.children);
   if (cards.length <= 3) {
@@ -733,6 +871,7 @@ sliderGrids.forEach((grid) => {
   }
 
   let index = 0;
+  const isLoopingSlider = true;
 
   const prev = document.createElement("button");
   prev.type = "button";
@@ -759,17 +898,29 @@ sliderGrids.forEach((grid) => {
     grid.style.setProperty("--card-gap", `${gap}px`);
     grid.style.setProperty("--card-width-px", `${cardWidth}px`);
     grid.style.setProperty("--slide-index", String(index));
-    prev.disabled = index <= 0;
-    next.disabled = index >= maxIndex;
+    prev.disabled = !isLoopingSlider && index <= 0;
+    next.disabled = !isLoopingSlider && index >= maxIndex;
   };
 
   prev.addEventListener("click", () => {
-    index -= 1;
+    const visible = getVisibleCount();
+    const maxIndex = Math.max(0, cards.length - visible);
+    if (isLoopingSlider) {
+      index = index <= 0 ? maxIndex : index - 1;
+    } else {
+      index -= 1;
+    }
     render();
   });
 
   next.addEventListener("click", () => {
-    index += 1;
+    const visible = getVisibleCount();
+    const maxIndex = Math.max(0, cards.length - visible);
+    if (isLoopingSlider) {
+      index = index >= maxIndex ? 0 : index + 1;
+    } else {
+      index += 1;
+    }
     render();
   });
 
@@ -793,12 +944,22 @@ sliderGrids.forEach((grid) => {
     const visible = getVisibleCount();
     const maxIndex = Math.max(0, cards.length - visible);
 
-    if (diff > threshold && index < maxIndex) {
-      index += 1;
-      render();
-    } else if (diff < -threshold && index > 0) {
-      index -= 1;
-      render();
+    if (diff > threshold) {
+      if (isLoopingSlider) {
+        index = index >= maxIndex ? 0 : index + 1;
+        render();
+      } else if (index < maxIndex) {
+        index += 1;
+        render();
+      }
+    } else if (diff < -threshold) {
+      if (isLoopingSlider) {
+        index = index <= 0 ? maxIndex : index - 1;
+        render();
+      } else if (index > 0) {
+        index -= 1;
+        render();
+      }
     }
   }, { passive: true });
 });
@@ -831,6 +992,30 @@ window.addEventListener(
   },
   { passive: false }
 );
+
+if (pageTopBtn) {
+  pageTopBtn.addEventListener("click", () => {
+    if (siteHeader) {
+      siteHeader.scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}
+
+window.addEventListener("scroll", updatePageTopButton, { passive: true });
+updatePageTopButton();
+
+window.addEventListener("DOMContentLoaded", resetToTopOnEntry);
+window.addEventListener("load", resetToTopOnEntry);
+window.addEventListener("pageshow", resetToTopOnEntry);
 
 if (!content[currentLanguage]) {
   currentLanguage = "zh";

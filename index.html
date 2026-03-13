@@ -24,11 +24,14 @@
       BGM Off
     </button>
 
+    <button class="page-top-btn" id="page-top-btn" type="button" aria-label="Back to top">
+      ↑
+    </button>
+
     <header class="site-header">
       <div class="nav-shell">
         <a class="brand" href="#top">
           <span class="brand-mark">EU</span>
-          <span id="brand-text">Explore The Unseen</span>
         </a>
         <nav class="site-nav">
           <a id="nav-story" href="#story">团队</a>
@@ -47,15 +50,17 @@
 
     <main id="top">
       <section class="hero reveal" data-reveal="hero">
-        <p class="eyebrow" id="hero-eyebrow">Explore The Unseen</p>
-        <h1 id="hero-title">去那些尚未被语言<br />完全命名的地方。</h1>
-        <p class="hero-text" id="hero-text">
-          冷静进入未知。<br />
-          克制抵达高处。
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" id="hero-button-plans" href="#future-plans">查看计划</a>
-          <a class="button button-secondary" id="hero-button-members" href="#members">成员档案</a>
+        <div class="hero-copy">
+          <p class="eyebrow" id="hero-eyebrow">Explore The Unseen</p>
+          <h1 id="hero-title">去那些尚未被语言完全命名的地方。</h1>
+          <p class="hero-text" id="hero-text">
+            冷静进入未知。<br />
+            克制抵达高处。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" id="hero-button-plans" href="#future-plans">查看计划</a>
+            <a class="button button-secondary" id="hero-button-members" href="#members">成员档案</a>
+          </div>
         </div>
       </section>
 
@@ -64,6 +69,24 @@
           <div class="device-glow"></div>
           <div class="device-frame">
             <div class="device-screen">
+              <div class="member-strip media-member-strip" aria-hidden="true">
+                <div class="member-strip-track">
+                  <span class="strip-member portrait-xie"></span>
+                  <span class="strip-member portrait-chen"></span>
+                  <span class="strip-member portrait-huang"></span>
+                  <span class="strip-member portrait-jiang"></span>
+                  <span class="strip-member portrait-xu"></span>
+                  <span class="strip-member portrait-fu"></span>
+                  <span class="strip-member portrait-li"></span>
+                  <span class="strip-member portrait-xie"></span>
+                  <span class="strip-member portrait-chen"></span>
+                  <span class="strip-member portrait-huang"></span>
+                  <span class="strip-member portrait-jiang"></span>
+                  <span class="strip-member portrait-xu"></span>
+                  <span class="strip-member portrait-fu"></span>
+                  <span class="strip-member portrait-li"></span>
+                </div>
+              </div>
               <div class="screen-topline" id="screen-topline">Explore The Unseen</div>
               <div class="screen-title" id="screen-title">Beyond the named trail, there is still altitude.</div>
               <div class="screen-grid">
@@ -77,11 +100,22 @@
       </section>
 
       <section id="story" class="statement reveal" data-reveal="statement">
-        <p class="eyebrow" id="story-eyebrow">About The Team</p>
-        <h2 id="story-title">四个人。 一套秩序。 向未被看清之地稳定推进。</h2>
-        <p id="story-text">
-          判断、配速、补给、协作，同时成立。
-        </p>
+        <div class="story-slider" id="story-slider">
+          <article class="story-slide story-slide-classic" data-story-slide="0">
+            <p class="eyebrow" id="story-eyebrow">About The Team</p>
+            <h2 id="story-title">Four people. One order. A steady push toward what remains unnamed.</h2>
+            <p id="story-text">Judgment, pace, supply, coordination.</p>
+          </article>
+          <article class="story-slide story-slide-expanded is-active" data-story-slide="1">
+            <p class="eyebrow" id="story-eyebrow-2">The New Team</p>
+            <h2 id="story-title-2">Seven people. A new team. A broader push toward what remains unnamed.</h2>
+            <p id="story-text-2">Judgment, pace, supply, record, expansion, companionship.</p>
+          </article>
+          <div class="story-controls">
+            <button class="story-control prev" id="story-prev" type="button" aria-label="Previous story">‹</button>
+            <button class="story-control next" id="story-next" type="button" aria-label="Next story">›</button>
+          </div>
+        </div>
       </section>
 
       <section id="future-plans" class="showcase reveal" data-reveal="plans">
@@ -199,70 +233,101 @@
           <p class="eyebrow" id="members-eyebrow">Team Members</p>
           <h2 id="members-title">四个不同背景的人，在山里形成了一种比分工更精密的结构。</h2>
         </div>
-        <div class="member-grid">
-          <button
-            class="member-card member-poster member-xie"
-            type="button"
-            data-member="xie"
-            aria-haspopup="dialog"
-          >
-            <span class="member-index">01</span>
-            <div class="member-card-content">
-              <h3 id="member-1-name">谢弘毅</h3>
-              <p id="member-1-role">领队主轴 / 公职气质的秩序建立者</p>
-            </div>
-          </button>
-          <button
-            class="member-card member-poster member-chen"
-            type="button"
-            data-member="chen"
-            aria-haspopup="dialog"
-          >
-            <span class="member-index">02</span>
-            <div class="member-card-content">
-              <h3 id="member-2-name">陈云哲</h3>
-              <p id="member-2-role">负重管理 / 装备与状态的双重维护者</p>
-            </div>
-          </button>
-          <button
-            class="member-card member-poster member-huang"
-            type="button"
-            data-member="huang"
-            aria-haspopup="dialog"
-          >
-            <span class="member-index">03</span>
-            <div class="member-card-content">
-              <h3 id="member-3-name">黄涂健隆</h3>
-              <p id="member-3-role">影像记录 / 技术与情趣的提炼者</p>
-            </div>
-          </button>
-          <button
-            class="member-card member-poster member-jiang"
-            type="button"
-            data-member="jiang"
-            aria-haspopup="dialog"
-          >
-            <span class="member-index">04</span>
-            <div class="member-card-content">
-              <h3 id="member-4-name">姜伟杨</h3>
-              <p id="member-4-role">补给安全 / 稳定续航的守护者</p>
-            </div>
-          </button>
+        <div class="slider-shell">
+          <div class="member-grid slider-grid" data-slider="members">
+            <button
+              class="member-card member-poster member-xie"
+              type="button"
+              data-member="xie"
+              aria-haspopup="dialog"
+            >
+              <span class="member-index">01</span>
+              <div class="member-card-content">
+                <h3 id="member-1-name">谢弘毅</h3>
+                <p id="member-1-role">领队主轴 / 公职气质的秩序建立者</p>
+              </div>
+            </button>
+            <button
+              class="member-card member-poster member-chen"
+              type="button"
+              data-member="chen"
+              aria-haspopup="dialog"
+            >
+              <span class="member-index">02</span>
+              <div class="member-card-content">
+                <h3 id="member-2-name">陈云哲</h3>
+                <p id="member-2-role">负重管理 / 装备与状态的双重维护者</p>
+              </div>
+            </button>
+            <button
+              class="member-card member-poster member-huang"
+              type="button"
+              data-member="huang"
+              aria-haspopup="dialog"
+            >
+              <span class="member-index">03</span>
+              <div class="member-card-content">
+                <h3 id="member-3-name">黄涂健隆</h3>
+                <p id="member-3-role">影像记录 / 技术与情趣的提炼者</p>
+              </div>
+            </button>
+            <button
+              class="member-card member-poster member-jiang"
+              type="button"
+              data-member="jiang"
+              aria-haspopup="dialog"
+            >
+              <span class="member-index">04</span>
+              <div class="member-card-content">
+                <h3 id="member-4-name">姜伟杨</h3>
+                <p id="member-4-role">补给安全 / 稳定续航的守护者</p>
+              </div>
+            </button>
+            <button
+              class="member-card member-poster member-placeholder-1"
+              type="button"
+              data-member="placeholder1"
+              aria-haspopup="dialog"
+            >
+              <span class="member-index">05</span>
+              <div class="member-card-content">
+                <h3 id="member-5-name">徐丹宁</h3>
+                <p id="member-5-role">伟大的教育家 / 徐校长</p>
+              </div>
+            </button>
+            <button
+              class="member-card member-poster member-placeholder-2"
+              type="button"
+              data-member="placeholder2"
+              aria-haspopup="dialog"
+            >
+              <span class="member-index">06</span>
+              <div class="member-card-content">
+                <h3 id="member-6-name">富贵</h3>
+                <p id="member-6-role">开疆扩土的先锋 / 最忠诚的卫士</p>
+              </div>
+            </button>
+            <button
+              class="member-card member-poster member-placeholder-3"
+              type="button"
+              data-member="placeholder3"
+              aria-haspopup="dialog"
+            >
+              <span class="member-index">07</span>
+              <div class="member-card-content">
+                <h3 id="member-7-name">李昕怡</h3>
+                <p id="member-7-role">氛围管家 / 团队活力的调节者</p>
+              </div>
+            </button>
+          </div>
         </div>
       </section>
 
       <section class="metrics reveal" data-reveal="metrics">
-        <div class="metric">
-          <strong>12+</strong>
-          <span id="metric-1">已完成路线</span>
-        </div>
-        <div class="metric">
-          <strong>4</strong>
-          <span id="metric-2">长期成员</span>
-        </div>
-        <div class="metric">
-          <strong>5</strong>
-          <span id="metric-3">当前计划中的目标方向</span>
+        <div class="metric metric-quote">
+          <strong id="metric-value-1">眼里是山，</strong>
+          <strong id="metric-value-2">那就不好走。</strong>
+          <strong id="metric-value-3">眼里是景，就好走。</strong>
         </div>
       </section>
 
