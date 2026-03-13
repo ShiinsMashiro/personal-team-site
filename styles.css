@@ -1906,8 +1906,8 @@ main {
   .members,
   .metrics,
   .contact {
-    min-height: auto;
-    padding: 104px 0 84px;
+    min-height: 88svh;
+    padding: 132px 0 112px;
     display: flex;
     flex-direction: column;
   }
@@ -1924,7 +1924,7 @@ main {
   }
 
   .story-slider {
-    min-height: 520px;
+    min-height: 620px;
   }
 
   .story-slide {
