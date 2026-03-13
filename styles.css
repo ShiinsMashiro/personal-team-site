@@ -683,15 +683,16 @@ main {
   content: "";
   position: absolute;
   inset: 0;
+  background-color: #000;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.62)),
-    radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.42)),
+    radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.12), transparent 28%),
     url("./members/huang1.png");
   background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 0.28;
-  filter: brightness(0.62) saturate(0.84);
+  background-position: center center, center 16%, center 68%;
+  background-size: auto, auto, contain;
+  opacity: 0.5;
+  filter: brightness(0.88) saturate(0.92);
   z-index: 0;
 }
 
@@ -1809,6 +1810,10 @@ main {
   line-height: 0.98;
   letter-spacing: -0.06em;
   max-width: 16ch;
+}
+
+.metric-quote strong:nth-child(2) {
+  margin-bottom: 1.1em;
 }
 
 .metric span:empty {
