@@ -127,9 +127,10 @@ const content = {
     member6Role: "开疆扩土的先锋 / 最忠诚的卫士",
     member7Name: "李昕怡",
     member7Role: "氛围管家 / 团队活力的调节者",
-    metricValue1: "眼里是山，那就不好走。",
-    metricValue2: "",
-    metricValue3: "眼里是景，就好走。",
+    metricValue1: "眼里是山，",
+    metricValue2: "那就不好走。",
+    metricValue3: "眼里是景，",
+    metricValue4: "就好走。",
     metric1: "",
     metric2: "",
     metric3: "",
@@ -285,9 +286,10 @@ const content = {
     member6Role: "Pioneer of expansion / Most loyal guardian",
     member7Name: "Li Xinyi",
     member7Role: "Atmosphere steward / Regulator of team energy",
-    metricValue1: "Eyes on the mountain, and the walk gets hard.",
-    metricValue2: "",
-    metricValue3: "Eyes on the view, and it goes easier.",
+    metricValue1: "Eyes on the mountain,",
+    metricValue2: "and the walk gets hard.",
+    metricValue3: "Eyes on the view,",
+    metricValue4: "and it goes easier.",
     metric1: "",
     metric2: "",
     metric3: "",
@@ -491,6 +493,7 @@ const applyLanguage = async (lang) => {
   setText("metric-value-1", copy.metricValue1);
   setText("metric-value-2", copy.metricValue2);
   setText("metric-value-3", copy.metricValue3);
+  setText("metric-value-4", copy.metricValue4);
   setText("metric-1", copy.metric1);
   setText("metric-2", copy.metric2);
   setText("metric-3", copy.metric3);

@@ -1955,11 +1955,9 @@ main {
     font-size: 1.1rem;
   }
 
-  /* 滑块容器 - 允许触摸滑动 */
+  /* 滑块容器 - 统一交给脚本控制位移 */
   .slider-shell {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+    overflow: hidden;
     padding-bottom: 60px;
     margin-bottom: -20px;
   }
@@ -1967,16 +1965,13 @@ main {
   .slider-grid {
     --visible-cards: 1;
     --card-gap: 14px;
-    width: 100%;
+    width: max-content;
     min-width: 100%;
-    display: flex;
-    gap: var(--card-gap);
   }
 
   .slider-grid > * {
     flex: 0 0 100%;
     min-width: 100%;
-    scroll-snap-align: center;
   }
 
   .slider-shell::before,
@@ -2432,9 +2427,7 @@ main {
   /* 轮播 - 触摸滑动 */
   .slider-shell {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+    overflow: hidden;
     overscroll-behavior-x: contain;
     touch-action: pan-x;
     padding-bottom: 50px;
@@ -2445,17 +2438,13 @@ main {
   .slider-grid {
     --visible-cards: 1;
     --card-gap: 10px;
-    width: 100%;
+    width: max-content;
     min-width: 100%;
-    transform: none !important;
-    display: flex;
-    gap: var(--card-gap);
   }
 
   .slider-grid > * {
     flex: 0 0 calc(100% - var(--card-gap));
     min-width: calc(100% - var(--card-gap));
-    scroll-snap-align: center;
   }
 
   .slider-control {
@@ -2465,6 +2454,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 8;
   }
 
   .slider-control.prev {
