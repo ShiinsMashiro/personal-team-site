@@ -2020,16 +2020,21 @@ main {
   }
 
   .nav-shell {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "brand nav"
+      "lang lang";
     padding: 10px 12px;
     border-radius: 16px;
-    align-items: stretch;
     gap: 8px;
+    align-items: center;
   }
 
   .brand {
+    grid-area: brand;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 0;
   }
 
   .brand-mark {
@@ -2044,16 +2049,23 @@ main {
 
   /* 导航改为横向滚动 */
   .site-nav {
+    grid-area: nav;
     width: 100%;
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: 6px;
     overflow-x: auto;
-    padding: 4px 0;
+    padding: 0;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
     touch-action: pan-x;
+    min-width: 0;
+  }
+
+  .lang-switch {
+    grid-area: lang;
+    justify-self: start;
   }
 
   .site-nav::-webkit-scrollbar {
