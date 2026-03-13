@@ -135,7 +135,7 @@ const content = {
     metric3: "",
     contactEyebrow: "联系",
     contactTitle: "联系 <span class=\"brand-accent\">Explore The Unseen</span>。",
-    contactText: "微信、邮箱与电话均为真实联系方式。",
+    contactText: "",
     contactWechat: "微信：htjl17706403360",
     memberModalLabel: "成员档案",
     gearModalLabel: "装备详情",
@@ -857,6 +857,40 @@ if (storyPrev && storyNext && storySlides.length) {
   });
 
   renderStorySlides();
+}
+
+if (storySlides.length) {
+  const storySlider = document.querySelector("#story-slider");
+  let storyTouchStartX = 0;
+  let storyTouchEndX = 0;
+
+  if (storySlider) {
+    storySlider.addEventListener(
+      "touchstart",
+      (event) => {
+        storyTouchStartX = event.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
+
+    storySlider.addEventListener(
+      "touchend",
+      (event) => {
+        storyTouchEndX = event.changedTouches[0].screenX;
+        const diff = storyTouchStartX - storyTouchEndX;
+        const threshold = 40;
+
+        if (diff > threshold) {
+          currentStorySlide = currentStorySlide >= storySlides.length - 1 ? 0 : currentStorySlide + 1;
+          renderStorySlides();
+        } else if (diff < -threshold) {
+          currentStorySlide = currentStorySlide <= 0 ? storySlides.length - 1 : currentStorySlide - 1;
+          renderStorySlides();
+        }
+      },
+      { passive: true }
+    );
+  }
 }
 
 sliderGrids.forEach((grid) => {
