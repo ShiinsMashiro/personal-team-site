@@ -2578,17 +2578,30 @@ main {
   }
 
   /* 联系方式 */
+  .contact {
+    min-height: 100svh;
+    padding: 96px 0 84px;
+    justify-content: flex-end;
+  }
+
   .contact h2 {
-    font-size: clamp(1.4rem, 6.5vw, 1.8rem);
+    font-size: clamp(2rem, 9vw, 2.7rem);
+    line-height: 0.96;
+    max-width: 9ch;
   }
 
   .contact-text {
     margin: 14px 0 0;
   }
 
+  .contact-actions {
+    gap: 10px;
+    width: 100%;
+  }
+
   .contact-actions a {
-    padding: 10px 14px;
-    font-size: 0.85rem;
+    padding: 12px 14px;
+    font-size: 0.95rem;
   }
 
   /* 计划卡片 */
