@@ -1969,14 +1969,13 @@ main {
     --card-gap: 14px;
     width: 100%;
     min-width: 100%;
-    transform: none !important;
     display: flex;
     gap: var(--card-gap);
   }
 
   .slider-grid > * {
-    flex: 0 0 calc(100% - var(--card-gap));
-    min-width: calc(100% - var(--card-gap));
+    flex: 0 0 100%;
+    min-width: 100%;
     scroll-snap-align: center;
   }
 
@@ -2374,8 +2373,8 @@ main {
   }
 
   .member-card {
-    min-height: 230px;
-    padding: 12px;
+    min-height: 300px;
+    padding: 14px;
     border-radius: 14px;
   }
 
