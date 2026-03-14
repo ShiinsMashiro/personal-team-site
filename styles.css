@@ -257,7 +257,7 @@ main {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.52)),
     radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.04), transparent 24%),
-    url("./members/all.png");
+    url("./members/all.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -457,6 +457,7 @@ main {
   width: max-content;
   height: 100%;
   animation: memberStripScroll 42s linear infinite;
+  will-change: transform;
 }
 
 .strip-member {
@@ -473,43 +474,43 @@ main {
 .portrait-xie {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.5)),
-    url("./members/xie.png");
+    url("./members/xie.jpg");
 }
 
 .portrait-chen {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.5)),
-    url("./members/chen.png");
+    url("./members/chen.jpg");
 }
 
 .portrait-huang {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.5)),
-    url("./members/huang.png");
+    url("./members/huang.jpg");
 }
 
 .portrait-jiang {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.5)),
-    url("./members/jiang.png");
+    url("./members/jiang.jpg");
 }
 
 .portrait-xu {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.5)),
-    url("./members/xu.png");
+    url("./members/xu.jpg");
 }
 
 .portrait-fu {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.5)),
-    url("./members/fu.png");
+    url("./members/fu.jpg");
 }
 
 .portrait-li {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.5)),
-    url("./members/li.png");
+    url("./members/li.jpg");
 }
 
 .media-member-strip {
@@ -626,11 +627,15 @@ main {
 }
 
 .story-slide-classic::before {
-  background-image: url("./members/all.png");
+  background-image: url("./members/all.jpg");
+}
+
+.story-slide-pioneer::before {
+  background-image: url("./members/fu1.jpg");
 }
 
 .story-slide-expanded::before {
-  background-image: url("./members/all1.png");
+  background-image: url("./members/all1.jpg");
 }
 
 .story-slide > * {
@@ -709,7 +714,7 @@ main {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
     radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.12), transparent 28%),
-    url("./members/huang1.png");
+    url("./members/contact.jpg");
   background-repeat: no-repeat;
   background-position: center center, center 16%, center 68%;
   background-size: auto, auto, contain;
@@ -845,10 +850,10 @@ main {
 
 @keyframes memberStripScroll {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(calc(-1 * (var(--strip-width) * 7)));
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -1432,43 +1437,43 @@ main {
 .member-xie::after {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
-    url("./members/xie.png");
+    url("./members/xie.jpg");
 }
 
 .member-chen::after {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
-    url("./members/chen.png");
+    url("./members/chen.jpg");
 }
 
 .member-huang::after {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
-    url("./members/huang.png");
+    url("./members/huang.jpg");
 }
 
 .member-jiang::after {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
-    url("./members/jiang.png");
+    url("./members/jiang.jpg");
 }
 
 .member-placeholder-1::after {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
-    url("./members/xu.png");
+    url("./members/xu.jpg");
 }
 
 .member-placeholder-2::after {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
-    url("./members/fu.png");
+    url("./members/fu.jpg");
 }
 
 .member-placeholder-3::after {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.56)),
-    url("./members/li.png");
+    url("./members/li.jpg");
 }
 
 .member-index {

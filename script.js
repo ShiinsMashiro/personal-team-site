@@ -27,14 +27,16 @@ const storySlides = Array.from(document.querySelectorAll("[data-story-slide]"));
 const storyPrev = document.querySelector("#story-prev");
 const storyNext = document.querySelector("#story-next");
 const bgmSources = {
-  zh: "./source/audio/不凡.mp3",
-  en: "./source/audio/birthday.mp3",
+  zh: "./source/audio/bgm.mp3",
+  en: "./source/audio/bgm.mp3",
 };
 
 let currentLanguage = localStorage.getItem("etu-language") || "en";
 let currentMemberKey = null;
 let currentGearKey = null;
-let currentStorySlide = 1;
+let currentStorySlide = 2;
+const storySlideOrder = [2, 1, 0];
+let storyAutoAdvanceTimer = null;
 
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
@@ -72,6 +74,9 @@ const content = {
     storyEyebrow: "",
     storyTitle: "TEAM",
     storyText: "",
+    storyEyebrowMid: "",
+    storyTitleMid: "<span class=\"title-accent\">P</span>IONEER",
+    storyTextMid: "",
     storyEyebrow2: "",
     storyTitle2: "<span class=\"title-accent\">N</span>EW TEAM",
     storyText2: "",
@@ -232,6 +237,9 @@ const content = {
     storyEyebrow: "",
     storyTitle: "TEAM",
     storyText: "",
+    storyEyebrowMid: "",
+    storyTitleMid: "<span class=\"title-accent\">P</span>IONEER",
+    storyTextMid: "",
     storyEyebrow2: "",
     storyTitle2: "<span class=\"title-accent\">N</span>EW TEAM",
     storyText2: "",
@@ -436,6 +444,9 @@ const applyLanguage = async (lang) => {
   setText("story-eyebrow", copy.storyEyebrow);
   setText("story-title", copy.storyTitle, true);
   setText("story-text", copy.storyText);
+  setText("story-eyebrow-mid", copy.storyEyebrowMid);
+  setText("story-title-mid", copy.storyTitleMid, true);
+  setText("story-text-mid", copy.storyTextMid);
   setText("story-eyebrow-2", copy.storyEyebrow2);
   setText("story-title-2", copy.storyTitle2, true);
   setText("story-text-2", copy.storyText2);
@@ -835,6 +846,37 @@ const renderStorySlides = () => {
   });
 };
 
+const getStoryOrderIndex = () => {
+  const index = storySlideOrder.indexOf(currentStorySlide);
+  return index === -1 ? 0 : index;
+};
+
+const goToNextStorySlide = () => {
+  const nextOrderIndex = (getStoryOrderIndex() + 1) % storySlideOrder.length;
+  currentStorySlide = storySlideOrder[nextOrderIndex];
+  renderStorySlides();
+};
+
+const goToPrevStorySlide = () => {
+  const prevOrderIndex = (getStoryOrderIndex() - 1 + storySlideOrder.length) % storySlideOrder.length;
+  currentStorySlide = storySlideOrder[prevOrderIndex];
+  renderStorySlides();
+};
+
+const resetStoryAutoAdvance = () => {
+  if (storyAutoAdvanceTimer) {
+    window.clearInterval(storyAutoAdvanceTimer);
+  }
+
+  if (!storySlides.length) {
+    return;
+  }
+
+  storyAutoAdvanceTimer = window.setInterval(() => {
+    goToNextStorySlide();
+  }, 5000);
+};
+
 pageSections.forEach((section, index) => {
   if (index >= pageSections.length - 1) {
     return;
@@ -852,16 +894,17 @@ pageSections.forEach((section, index) => {
 
 if (storyPrev && storyNext && storySlides.length) {
   storyPrev.addEventListener("click", () => {
-    currentStorySlide = currentStorySlide <= 0 ? storySlides.length - 1 : currentStorySlide - 1;
-    renderStorySlides();
+    goToPrevStorySlide();
+    resetStoryAutoAdvance();
   });
 
   storyNext.addEventListener("click", () => {
-    currentStorySlide = currentStorySlide >= storySlides.length - 1 ? 0 : currentStorySlide + 1;
-    renderStorySlides();
+    goToNextStorySlide();
+    resetStoryAutoAdvance();
   });
 
   renderStorySlides();
+  resetStoryAutoAdvance();
 }
 
 if (storySlides.length) {
@@ -886,11 +929,11 @@ if (storySlides.length) {
         const threshold = 40;
 
         if (diff > threshold) {
-          currentStorySlide = currentStorySlide >= storySlides.length - 1 ? 0 : currentStorySlide + 1;
-          renderStorySlides();
+          goToNextStorySlide();
+          resetStoryAutoAdvance();
         } else if (diff < -threshold) {
-          currentStorySlide = currentStorySlide <= 0 ? storySlides.length - 1 : currentStorySlide - 1;
-          renderStorySlides();
+          goToPrevStorySlide();
+          resetStoryAutoAdvance();
         }
       },
       { passive: true }
@@ -910,7 +953,17 @@ sliderGrids.forEach((grid) => {
   }
 
   let index = 0;
+  const isMembersSlider = grid.dataset.slider === "members";
   const isLoopingSlider = true;
+  const baseCards = [...cards];
+  const cloneCount = isMembersSlider ? Math.min(3, baseCards.length) : 0;
+
+  if (isMembersSlider && cloneCount > 0) {
+    const headClones = baseCards.slice(0, cloneCount).map((card) => card.cloneNode(true));
+    const tailClones = baseCards.slice(-cloneCount).map((card) => card.cloneNode(true));
+    headClones.forEach((clone) => grid.appendChild(clone));
+    tailClones.reverse().forEach((clone) => grid.insertBefore(clone, grid.firstChild));
+  }
 
   const prev = document.createElement("button");
   prev.type = "button";
@@ -926,45 +979,88 @@ sliderGrids.forEach((grid) => {
 
   const getVisibleCount = () => (window.innerWidth <= 980 ? 1 : 3);
 
+  const setGridTransition = (enabled) => {
+    grid.style.transition = enabled ? "" : "none";
+  };
+
   const render = () => {
     const visible = getVisibleCount();
-    const maxIndex = Math.max(0, cards.length - visible);
+    const maxIndex = isMembersSlider
+      ? Math.max(0, baseCards.length - 1)
+      : Math.max(0, baseCards.length - visible);
     const gap = parseFloat(window.getComputedStyle(grid).columnGap || window.getComputedStyle(grid).gap || "20");
     const shellWidth = shell.clientWidth;
     const cardWidth = (shellWidth - gap * (visible - 1)) / visible;
-    index = Math.min(index, maxIndex);
+    if (!isMembersSlider) {
+      index = Math.min(index, maxIndex);
+    }
+    const visualIndex = isMembersSlider ? index + cloneCount : index;
     grid.style.setProperty("--visible-cards", String(visible));
     grid.style.setProperty("--card-gap", `${gap}px`);
     grid.style.setProperty("--card-width-px", `${cardWidth}px`);
-    grid.style.setProperty("--slide-index", String(index));
+    grid.style.setProperty("--slide-index", String(visualIndex));
     prev.disabled = !isLoopingSlider && index <= 0;
     next.disabled = !isLoopingSlider && index >= maxIndex;
   };
 
   prev.addEventListener("click", () => {
     const visible = getVisibleCount();
-    const maxIndex = Math.max(0, cards.length - visible);
+    const maxIndex = isMembersSlider
+      ? Math.max(0, baseCards.length - 1)
+      : Math.max(0, baseCards.length - visible);
     if (isLoopingSlider) {
-      index = index <= 0 ? maxIndex : index - 1;
+      index = isMembersSlider ? index - 1 : index <= 0 ? maxIndex : index - 1;
     } else {
       index -= 1;
     }
+    setGridTransition(true);
     render();
   });
 
   next.addEventListener("click", () => {
     const visible = getVisibleCount();
-    const maxIndex = Math.max(0, cards.length - visible);
+    const maxIndex = isMembersSlider
+      ? Math.max(0, baseCards.length - 1)
+      : Math.max(0, baseCards.length - visible);
     if (isLoopingSlider) {
-      index = index >= maxIndex ? 0 : index + 1;
+      index = isMembersSlider ? index + 1 : index >= maxIndex ? 0 : index + 1;
     } else {
       index += 1;
     }
+    setGridTransition(true);
     render();
   });
 
+  if (isMembersSlider) {
+    grid.addEventListener("transitionend", (event) => {
+      if (event.propertyName !== "transform") {
+        return;
+      }
+
+      const visible = getVisibleCount();
+      const maxIndex = Math.max(0, baseCards.length - 1);
+
+      if (index < 0) {
+        index = maxIndex;
+      } else if (index > maxIndex) {
+        index = 0;
+      } else {
+        return;
+      }
+
+      setGridTransition(false);
+      render();
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setGridTransition(true);
+        });
+      });
+    });
+  }
+
   shell.appendChild(prev);
   shell.appendChild(next);
+  setGridTransition(true);
   render();
   window.addEventListener("resize", render);
 
@@ -981,11 +1077,14 @@ sliderGrids.forEach((grid) => {
     const diff = touchStartX - touchEndX;
     const threshold = 50;
     const visible = getVisibleCount();
-    const maxIndex = Math.max(0, cards.length - visible);
+    const maxIndex = isMembersSlider
+      ? Math.max(0, baseCards.length - 1)
+      : Math.max(0, baseCards.length - visible);
 
     if (diff > threshold) {
       if (isLoopingSlider) {
-        index = index >= maxIndex ? 0 : index + 1;
+        index = isMembersSlider ? index + 1 : index >= maxIndex ? 0 : index + 1;
+        setGridTransition(true);
         render();
       } else if (index < maxIndex) {
         index += 1;
@@ -993,7 +1092,8 @@ sliderGrids.forEach((grid) => {
       }
     } else if (diff < -threshold) {
       if (isLoopingSlider) {
-        index = index <= 0 ? maxIndex : index - 1;
+        index = isMembersSlider ? index - 1 : index <= 0 ? maxIndex : index - 1;
+        setGridTransition(true);
         render();
       } else if (index > 0) {
         index -= 1;
