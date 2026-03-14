@@ -1001,6 +1001,7 @@ sliderGrids.forEach((grid) => {
 
   if (isMembersSlider) {
     let isAnimating = false;
+    let memberTransitionTimer = null;
 
     const updateMembersTrackMetrics = () => {
       const visible = getVisibleCount();
@@ -1033,6 +1034,37 @@ sliderGrids.forEach((grid) => {
       });
     };
 
+    const clearMemberTransitionTimer = () => {
+      if (memberTransitionTimer) {
+        window.clearTimeout(memberTransitionTimer);
+        memberTransitionTimer = null;
+      }
+    };
+
+    const bindMemberTransition = (onDone) => {
+      let finished = false;
+
+      const finish = () => {
+        if (finished) {
+          return;
+        }
+        finished = true;
+        clearMemberTransitionTimer();
+        grid.removeEventListener("transitionend", onTransitionEnd);
+        onDone();
+      };
+
+      const onTransitionEnd = (event) => {
+        if (event.propertyName !== "transform") {
+          return;
+        }
+        finish();
+      };
+
+      grid.addEventListener("transitionend", onTransitionEnd);
+      memberTransitionTimer = window.setTimeout(finish, 700);
+    };
+
     const slideNextMember = () => {
       if (isAnimating) {
         return;
@@ -1042,12 +1074,7 @@ sliderGrids.forEach((grid) => {
       const stepWidth = getStepWidth();
       setMembersTransform(-stepWidth, true);
 
-      const onTransitionEnd = (event) => {
-        if (event.propertyName !== "transform") {
-          return;
-        }
-
-        grid.removeEventListener("transitionend", onTransitionEnd);
+      bindMemberTransition(() => {
         finishWithoutFlash(() => {
           const firstCard = grid.firstElementChild;
           if (firstCard) {
@@ -1055,9 +1082,7 @@ sliderGrids.forEach((grid) => {
           }
         });
         isAnimating = false;
-      };
-
-      grid.addEventListener("transitionend", onTransitionEnd);
+      });
     };
 
     const slidePrevMember = () => {
@@ -1081,17 +1106,19 @@ sliderGrids.forEach((grid) => {
         });
       });
 
-      const onTransitionEnd = (event) => {
-        if (event.propertyName !== "transform") {
-          return;
-        }
-
-        grid.removeEventListener("transitionend", onTransitionEnd);
+      bindMemberTransition(() => {
         isAnimating = false;
-      };
-
-      grid.addEventListener("transitionend", onTransitionEnd);
+      });
     };
+
+    [prev, next].forEach((button) => {
+      button.addEventListener("touchstart", (event) => {
+        event.stopPropagation();
+      }, { passive: true });
+      button.addEventListener("pointerdown", (event) => {
+        event.stopPropagation();
+      });
+    });
 
     prev.addEventListener("click", slidePrevMember);
     next.addEventListener("click", slideNextMember);
