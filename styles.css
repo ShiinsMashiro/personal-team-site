@@ -2038,11 +2038,6 @@ main {
     --mobile-gutter: 14px;
   }
 
-  html,
-  body {
-    scroll-snap-type: y mandatory;
-  }
-
   .member-strip {
     --strip-width: 112px;
   }
@@ -2136,8 +2131,6 @@ main {
     padding: 64px 0 56px;
     align-items: flex-end;
     text-align: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 
   .hero::before {
@@ -2155,8 +2148,6 @@ main {
   .hero-media {
     min-height: 100svh;
     padding: 72px 0 72px;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 
   .hero-media::before {
@@ -2316,8 +2307,6 @@ main {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 
   .reveal[data-reveal="hero"],
@@ -2578,16 +2567,16 @@ main {
 
   /* BGM 按钮 */
   .bgm-toggle {
-    right: 10px;
-    bottom: 56px;
+    right: calc(10px + env(safe-area-inset-right));
+    bottom: calc(56px + env(safe-area-inset-bottom));
     padding: 8px 10px;
     font-size: 0.68rem;
     min-width: 80px;
   }
 
   .page-top-btn {
-    right: 10px;
-    bottom: 104px;
+    right: calc(10px + env(safe-area-inset-right));
+    bottom: calc(104px + env(safe-area-inset-bottom));
     width: 42px;
     height: 42px;
     font-size: 1.05rem;
