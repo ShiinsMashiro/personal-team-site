@@ -21,6 +21,7 @@ html {
 
 body {
   margin: 0;
+  padding-top: env(safe-area-inset-top);
   overflow-x: hidden;
   font-family: "Plus Jakarta Sans", sans-serif;
   color: var(--text);
@@ -2036,10 +2037,19 @@ main {
 @media (max-width: 720px) {
   :root {
     --mobile-gutter: 14px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
   }
 
   .member-strip {
     --strip-width: 112px;
+  }
+
+  body {
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
   }
 
   main,
@@ -2049,7 +2059,7 @@ main {
 
   /* Header 优化 - 改为紧凑型 */
   .site-header {
-    padding: 8px 0;
+    padding: calc(8px + var(--safe-top)) 0 0;
   }
 
   .nav-shell {
@@ -2127,8 +2137,8 @@ main {
 
   /* Hero 区域 */
   .hero {
-    min-height: calc(100svh - 24px);
-    padding: 64px 0 56px;
+    min-height: calc(100svh - 24px - var(--safe-top));
+    padding: calc(64px + var(--safe-top)) 0 calc(56px + var(--safe-bottom));
     align-items: flex-end;
     text-align: center;
   }
@@ -2147,7 +2157,7 @@ main {
 
   .hero-media {
     min-height: 100svh;
-    padding: 72px 0 72px;
+    padding: calc(72px + var(--safe-top)) 0 calc(72px + var(--safe-bottom));
   }
 
   .hero-media::before {
@@ -2302,7 +2312,7 @@ main {
   .feature-section {
     width: 100%;
     min-height: 100svh;
-    padding: 88px 0 84px;
+    padding: calc(88px + var(--safe-top)) 0 calc(84px + var(--safe-bottom));
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -2328,11 +2338,11 @@ main {
   }
 
   .statement {
-    padding: 96px 0 92px;
+    padding: calc(96px + var(--safe-top)) 0 calc(92px + var(--safe-bottom));
   }
 
   .contact {
-    padding: 96px 0 92px;
+    padding: calc(96px + var(--safe-top)) 0 calc(92px + var(--safe-bottom));
   }
 
   .feature-stage,
@@ -2567,16 +2577,16 @@ main {
 
   /* BGM 按钮 */
   .bgm-toggle {
-    right: calc(10px + env(safe-area-inset-right));
-    bottom: calc(56px + env(safe-area-inset-bottom));
+    right: calc(10px + var(--safe-right));
+    bottom: calc(56px + var(--safe-bottom));
     padding: 8px 10px;
     font-size: 0.68rem;
     min-width: 80px;
   }
 
   .page-top-btn {
-    right: calc(10px + env(safe-area-inset-right));
-    bottom: calc(104px + env(safe-area-inset-bottom));
+    right: calc(10px + var(--safe-right));
+    bottom: calc(104px + var(--safe-bottom));
     width: 42px;
     height: 42px;
     font-size: 1.05rem;
@@ -2589,7 +2599,7 @@ main {
   /* 联系方式 */
   .contact {
     min-height: 100svh;
-    padding: 96px 0 108px;
+    padding: calc(96px + var(--safe-top)) 0 calc(108px + var(--safe-bottom));
     justify-content: flex-end;
   }
 
