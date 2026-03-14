@@ -454,15 +454,17 @@ main {
 
 .member-strip-track {
   display: flex;
-  width: max-content;
+  width: calc(var(--strip-width) * 14);
   height: 100%;
   animation: memberStripScroll 42s linear infinite;
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .strip-member {
   width: var(--strip-width);
   min-width: var(--strip-width);
+  flex: 0 0 var(--strip-width);
   height: 100%;
   background-size: cover;
   background-position: center 18%;
@@ -853,7 +855,7 @@ main {
     transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(calc(-1 * var(--strip-width) * 7), 0, 0);
   }
 }
 
@@ -2639,9 +2641,9 @@ main {
   }
 
   #members-title {
-    white-space: normal;
-    font-size: clamp(1.2rem, 5vw, 1.55rem);
-    letter-spacing: -0.04em;
+    white-space: nowrap;
+    font-size: clamp(0.96rem, 3.9vw, 1.18rem);
+    letter-spacing: -0.05em;
   }
 
   /* 计划卡片 */
