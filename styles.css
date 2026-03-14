@@ -21,7 +21,6 @@ html {
 
 body {
   margin: 0;
-  padding-top: env(safe-area-inset-top);
   overflow-x: hidden;
   font-family: "Plus Jakarta Sans", sans-serif;
   color: var(--text);
@@ -2577,16 +2576,16 @@ main {
 
   /* BGM 按钮 */
   .bgm-toggle {
-    right: calc(10px + var(--safe-right));
-    bottom: calc(56px + var(--safe-bottom));
+    right: 10px;
+    bottom: 56px;
     padding: 8px 10px;
     font-size: 0.68rem;
     min-width: 80px;
   }
 
   .page-top-btn {
-    right: calc(10px + var(--safe-right));
-    bottom: calc(104px + var(--safe-bottom));
+    right: 10px;
+    bottom: 104px;
     width: 42px;
     height: 42px;
     font-size: 1.05rem;
