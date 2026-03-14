@@ -790,7 +790,7 @@ main {
 
 .showcase-intro,
 .feature-copy {
-  border-radius: 32px;
+  border-radius: 5px;
   transition: transform 220ms ease, filter 220ms ease;
 }
 
@@ -862,7 +862,7 @@ main {
   position: relative;
   min-height: 220px;
   padding: 34px;
-  border-radius: 30px;
+  border-radius: 5px;
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   overflow: hidden;
 }
@@ -1198,7 +1198,7 @@ main {
   position: relative;
   min-height: 280px;
   padding: 24px;
-  border-radius: 32px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -1280,7 +1280,7 @@ main {
 .gear-card {
   min-height: 300px;
   padding: 32px;
-  border-radius: 32px;
+  border-radius: 5px;
   border: 1px solid var(--line);
   background:
     radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.12), transparent 28%),
@@ -1393,7 +1393,7 @@ main {
 .member-card {
   min-height: 380px;
   padding: 28px;
-  border-radius: 30px;
+  border-radius: 5px;
   border: 1px solid var(--line);
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 26%),
@@ -1547,7 +1547,7 @@ main {
   z-index: 1;
   width: min(100%, 720px);
   padding: 34px;
-  border-radius: 30px;
+  border-radius: 5px;
   border: 1px solid var(--line);
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.1), transparent 30%),
@@ -1729,7 +1729,7 @@ main {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   overflow: hidden;
-  border-radius: 32px;
+  border-radius: 5px;
   border: 1px solid var(--line);
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.1), transparent 30%),
@@ -1819,7 +1819,7 @@ main {
 
 .metric {
   padding: 28px;
-  border-radius: 28px;
+  border-radius: 5px;
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
@@ -2038,6 +2038,11 @@ main {
     --mobile-gutter: 14px;
   }
 
+  html,
+  body {
+    scroll-snap-type: y mandatory;
+  }
+
   .member-strip {
     --strip-width: 112px;
   }
@@ -2059,7 +2064,7 @@ main {
       "brand nav"
       "lang lang";
     padding: 10px 12px;
-    border-radius: 16px;
+    border-radius: 5px;
     gap: 8px;
     align-items: center;
   }
@@ -2127,10 +2132,12 @@ main {
 
   /* Hero 区域 */
   .hero {
-    min-height: calc(100svh - 100px);
-    padding: 48px 0 28px;
+    min-height: calc(100svh - 24px);
+    padding: 64px 0 56px;
     align-items: flex-end;
     text-align: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .hero::before {
@@ -2146,8 +2153,10 @@ main {
   }
 
   .hero-media {
-    min-height: auto;
-    padding: 48px 0 40px;
+    min-height: 100svh;
+    padding: 72px 0 72px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .hero-media::before {
@@ -2283,13 +2292,13 @@ main {
   .metric,
   .gear-card,
   .member-card {
-    border-radius: 16px;
+    border-radius: 5px;
   }
 
   .showcase-intro,
   .feature-copy {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
     text-align: left;
   }
 
@@ -2301,10 +2310,14 @@ main {
   .contact,
   .feature-section {
     width: 100%;
-    padding: 60px 0 48px;
+    min-height: 100svh;
+    padding: 88px 0 84px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .reveal[data-reveal="hero"],
@@ -2322,19 +2335,15 @@ main {
   .showcase,
   .gear,
   .members {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .statement {
-    justify-content: center;
-    min-height: auto;
-    padding: 80px 0 60px;
+    padding: 96px 0 92px;
   }
 
   .contact {
-    justify-content: center;
-    min-height: auto;
-    padding: 80px 0 60px;
+    padding: 96px 0 92px;
   }
 
   .feature-stage,
@@ -2422,9 +2431,9 @@ main {
   }
 
   .member-card {
-    min-height: 300px;
-    padding: 14px;
-    border-radius: 14px;
+    min-height: 380px;
+    padding: 18px;
+    border-radius: 5px;
   }
 
   .member-card-content {
@@ -2472,8 +2481,8 @@ main {
     overflow: hidden;
     overscroll-behavior-x: contain;
     touch-action: pan-x;
-    padding-bottom: 50px;
-    margin-bottom: -10px;
+    padding-bottom: 72px;
+    margin-bottom: 0;
     max-width: 100%;
   }
 
@@ -2515,7 +2524,7 @@ main {
     max-width: 100%;
     margin: 0;
     padding: 20px;
-    border-radius: 16px;
+    border-radius: 5px;
     max-height: 90vh;
     overflow-y: auto;
   }
@@ -2546,7 +2555,7 @@ main {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    border-radius: 16px;
+    border-radius: 5px;
     max-height: 90vh;
     overflow-y: auto;
   }
@@ -2591,7 +2600,7 @@ main {
   /* 联系方式 */
   .contact {
     min-height: 100svh;
-    padding: 72px 0 84px;
+    padding: 96px 0 108px;
     justify-content: flex-end;
   }
 

@@ -956,14 +956,6 @@ sliderGrids.forEach((grid) => {
   const isMembersSlider = grid.dataset.slider === "members";
   const isLoopingSlider = true;
   const baseCards = [...cards];
-  const cloneCount = isMembersSlider ? Math.min(3, baseCards.length) : 0;
-
-  if (isMembersSlider && cloneCount > 0) {
-    const headClones = baseCards.slice(0, cloneCount).map((card) => card.cloneNode(true));
-    const tailClones = baseCards.slice(-cloneCount).map((card) => card.cloneNode(true));
-    headClones.forEach((clone) => grid.appendChild(clone));
-    tailClones.reverse().forEach((clone) => grid.insertBefore(clone, grid.firstChild));
-  }
 
   const prev = document.createElement("button");
   prev.type = "button";
@@ -983,33 +975,162 @@ sliderGrids.forEach((grid) => {
     grid.style.transition = enabled ? "" : "none";
   };
 
+  if (isMembersSlider) {
+    let isAnimating = false;
+
+    const updateMembersTrackMetrics = () => {
+      const visible = getVisibleCount();
+      const gap = parseFloat(window.getComputedStyle(grid).columnGap || window.getComputedStyle(grid).gap || "20");
+      const shellWidth = shell.clientWidth;
+      const cardWidth = (shellWidth - gap * (visible - 1)) / visible;
+      grid.style.setProperty("--visible-cards", String(visible));
+      grid.style.setProperty("--card-gap", `${gap}px`);
+      grid.style.setProperty("--card-width-px", `${cardWidth}px`);
+      return { gap, cardWidth };
+    };
+
+    const setMembersTransform = (value, animate) => {
+      setGridTransition(animate);
+      grid.style.transform = `translate3d(${value}px, 0, 0)`;
+    };
+
+    const getStepWidth = () => {
+      const { gap, cardWidth } = updateMembersTrackMetrics();
+      return cardWidth + gap;
+    };
+
+    const finishWithoutFlash = (callback) => {
+      setGridTransition(false);
+      callback();
+      grid.style.transform = "translate3d(0, 0, 0)";
+      void grid.offsetHeight;
+      requestAnimationFrame(() => {
+        setGridTransition(true);
+      });
+    };
+
+    const slideNextMember = () => {
+      if (isAnimating) {
+        return;
+      }
+
+      isAnimating = true;
+      const stepWidth = getStepWidth();
+      setMembersTransform(-stepWidth, true);
+
+      const onTransitionEnd = (event) => {
+        if (event.propertyName !== "transform") {
+          return;
+        }
+
+        grid.removeEventListener("transitionend", onTransitionEnd);
+        finishWithoutFlash(() => {
+          const firstCard = grid.firstElementChild;
+          if (firstCard) {
+            grid.appendChild(firstCard);
+          }
+        });
+        isAnimating = false;
+      };
+
+      grid.addEventListener("transitionend", onTransitionEnd);
+    };
+
+    const slidePrevMember = () => {
+      if (isAnimating) {
+        return;
+      }
+
+      isAnimating = true;
+      const stepWidth = getStepWidth();
+      finishWithoutFlash(() => {
+        const lastCard = grid.lastElementChild;
+        if (lastCard) {
+          grid.insertBefore(lastCard, grid.firstElementChild);
+        }
+        grid.style.transform = `translate3d(${-stepWidth}px, 0, 0)`;
+      });
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setMembersTransform(0, true);
+        });
+      });
+
+      const onTransitionEnd = (event) => {
+        if (event.propertyName !== "transform") {
+          return;
+        }
+
+        grid.removeEventListener("transitionend", onTransitionEnd);
+        isAnimating = false;
+      };
+
+      grid.addEventListener("transitionend", onTransitionEnd);
+    };
+
+    prev.addEventListener("click", slidePrevMember);
+    next.addEventListener("click", slideNextMember);
+
+    shell.appendChild(prev);
+    shell.appendChild(next);
+    updateMembersTrackMetrics();
+    setMembersTransform(0, false);
+    window.addEventListener("resize", () => {
+      updateMembersTrackMetrics();
+      setMembersTransform(0, false);
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    shell.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
+
+    shell.addEventListener(
+      "touchend",
+      (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        const threshold = 50;
+
+        if (diff > threshold) {
+          slideNextMember();
+        } else if (diff < -threshold) {
+          slidePrevMember();
+        }
+      },
+      { passive: true }
+    );
+
+    return;
+  }
+
   const render = () => {
     const visible = getVisibleCount();
-    const maxIndex = isMembersSlider
-      ? Math.max(0, baseCards.length - 1)
-      : Math.max(0, baseCards.length - visible);
+    const maxIndex = Math.max(0, baseCards.length - visible);
     const gap = parseFloat(window.getComputedStyle(grid).columnGap || window.getComputedStyle(grid).gap || "20");
     const shellWidth = shell.clientWidth;
     const cardWidth = (shellWidth - gap * (visible - 1)) / visible;
-    if (!isMembersSlider) {
-      index = Math.min(index, maxIndex);
-    }
-    const visualIndex = isMembersSlider ? index + cloneCount : index;
+    index = Math.min(index, maxIndex);
     grid.style.setProperty("--visible-cards", String(visible));
     grid.style.setProperty("--card-gap", `${gap}px`);
     grid.style.setProperty("--card-width-px", `${cardWidth}px`);
-    grid.style.setProperty("--slide-index", String(visualIndex));
+    grid.style.setProperty("--slide-index", String(index));
     prev.disabled = !isLoopingSlider && index <= 0;
     next.disabled = !isLoopingSlider && index >= maxIndex;
   };
 
   prev.addEventListener("click", () => {
     const visible = getVisibleCount();
-    const maxIndex = isMembersSlider
-      ? Math.max(0, baseCards.length - 1)
-      : Math.max(0, baseCards.length - visible);
+    const maxIndex = Math.max(0, baseCards.length - visible);
     if (isLoopingSlider) {
-      index = isMembersSlider ? index - 1 : index <= 0 ? maxIndex : index - 1;
+      index = index <= 0 ? maxIndex : index - 1;
     } else {
       index -= 1;
     }
@@ -1019,44 +1140,15 @@ sliderGrids.forEach((grid) => {
 
   next.addEventListener("click", () => {
     const visible = getVisibleCount();
-    const maxIndex = isMembersSlider
-      ? Math.max(0, baseCards.length - 1)
-      : Math.max(0, baseCards.length - visible);
+    const maxIndex = Math.max(0, baseCards.length - visible);
     if (isLoopingSlider) {
-      index = isMembersSlider ? index + 1 : index >= maxIndex ? 0 : index + 1;
+      index = index >= maxIndex ? 0 : index + 1;
     } else {
       index += 1;
     }
     setGridTransition(true);
     render();
   });
-
-  if (isMembersSlider) {
-    grid.addEventListener("transitionend", (event) => {
-      if (event.propertyName !== "transform") {
-        return;
-      }
-
-      const visible = getVisibleCount();
-      const maxIndex = Math.max(0, baseCards.length - 1);
-
-      if (index < 0) {
-        index = maxIndex;
-      } else if (index > maxIndex) {
-        index = 0;
-      } else {
-        return;
-      }
-
-      setGridTransition(false);
-      render();
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setGridTransition(true);
-        });
-      });
-    });
-  }
 
   shell.appendChild(prev);
   shell.appendChild(next);
@@ -1077,13 +1169,11 @@ sliderGrids.forEach((grid) => {
     const diff = touchStartX - touchEndX;
     const threshold = 50;
     const visible = getVisibleCount();
-    const maxIndex = isMembersSlider
-      ? Math.max(0, baseCards.length - 1)
-      : Math.max(0, baseCards.length - visible);
+    const maxIndex = Math.max(0, baseCards.length - visible);
 
     if (diff > threshold) {
       if (isLoopingSlider) {
-        index = isMembersSlider ? index + 1 : index >= maxIndex ? 0 : index + 1;
+        index = index >= maxIndex ? 0 : index + 1;
         setGridTransition(true);
         render();
       } else if (index < maxIndex) {
@@ -1092,7 +1182,7 @@ sliderGrids.forEach((grid) => {
       }
     } else if (diff < -threshold) {
       if (isLoopingSlider) {
-        index = isMembersSlider ? index - 1 : index <= 0 ? maxIndex : index - 1;
+        index = index <= 0 ? maxIndex : index - 1;
         setGridTransition(true);
         render();
       } else if (index > 0) {
