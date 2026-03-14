@@ -585,7 +585,7 @@ const openMemberModal = (memberKey) => {
   modalText.textContent = details.text;
   memberModal.classList.add("is-open");
   memberModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflowY = "hidden";
 };
 
 const closeMemberModal = () => {
@@ -596,7 +596,7 @@ const closeMemberModal = () => {
   currentMemberKey = null;
   memberModal.classList.remove("is-open");
   memberModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
+  document.body.style.overflowY = "";
 };
 
 const openGearModal = (gearKey) => {
@@ -613,7 +613,7 @@ const openGearModal = (gearKey) => {
   gearModalVisual.style.backgroundImage = gearVisuals[gearKey];
   gearModal.classList.add("is-open");
   gearModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflowY = "hidden";
 };
 
 const closeGearModal = () => {
@@ -624,7 +624,7 @@ const closeGearModal = () => {
   currentGearKey = null;
   gearModal.classList.remove("is-open");
   gearModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
+  document.body.style.overflowY = "";
 };
 
 memberCards.forEach((card) => {
