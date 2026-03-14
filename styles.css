@@ -2046,10 +2046,6 @@ main {
     --strip-width: 112px;
   }
 
-  body {
-    padding-left: var(--safe-left);
-    padding-right: var(--safe-right);
-  }
 
   main,
   .nav-shell {
