@@ -2054,7 +2054,7 @@ main {
 
   /* Header 优化 - 改为紧凑型 */
   .site-header {
-    padding: calc(8px + var(--safe-top)) 0 0;
+    padding: 8px 0 0;
   }
 
   .nav-shell {
@@ -2132,8 +2132,8 @@ main {
 
   /* Hero 区域 */
   .hero {
-    min-height: calc(100svh - 24px - var(--safe-top));
-    padding: calc(64px + var(--safe-top)) 0 calc(56px + var(--safe-bottom));
+    min-height: calc(100svh - 24px);
+    padding: 64px 0 56px;
     align-items: flex-end;
     text-align: center;
   }
@@ -2152,7 +2152,7 @@ main {
 
   .hero-media {
     min-height: 100svh;
-    padding: calc(72px + var(--safe-top)) 0 calc(72px + var(--safe-bottom));
+    padding: 72px 0 72px;
   }
 
   .hero-media::before {
@@ -2307,7 +2307,7 @@ main {
   .feature-section {
     width: 100%;
     min-height: 100svh;
-    padding: calc(88px + var(--safe-top)) 0 calc(84px + var(--safe-bottom));
+    padding: 88px 0 84px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -2333,11 +2333,11 @@ main {
   }
 
   .statement {
-    padding: calc(96px + var(--safe-top)) 0 calc(92px + var(--safe-bottom));
+    padding: 96px 0 92px;
   }
 
   .contact {
-    padding: calc(96px + var(--safe-top)) 0 calc(92px + var(--safe-bottom));
+    padding: 96px 0 92px;
   }
 
   .feature-stage,
@@ -2594,7 +2594,7 @@ main {
   /* 联系方式 */
   .contact {
     min-height: 100svh;
-    padding: calc(96px + var(--safe-top)) 0 calc(108px + var(--safe-bottom));
+    padding: 96px 0 108px;
     justify-content: flex-end;
   }
 
