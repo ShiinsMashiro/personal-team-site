@@ -26,6 +26,7 @@ const metaDescription = document.querySelector("#meta-description");
 const storySlides = Array.from(document.querySelectorAll("[data-story-slide]"));
 const storyPrev = document.querySelector("#story-prev");
 const storyNext = document.querySelector("#story-next");
+const storySection = document.querySelector("#story");
 const bgmSources = {
   zh: "./source/audio/bgm.mp3",
   en: "./source/audio/bgm.mp3",
@@ -877,6 +878,13 @@ const resetStoryAutoAdvance = () => {
   }, 5000);
 };
 
+const stopStoryAutoAdvance = () => {
+  if (storyAutoAdvanceTimer) {
+    window.clearInterval(storyAutoAdvanceTimer);
+    storyAutoAdvanceTimer = null;
+  }
+};
+
 pageSections.forEach((section, index) => {
   if (index >= pageSections.length - 1) {
     return;
@@ -904,7 +912,6 @@ if (storyPrev && storyNext && storySlides.length) {
   });
 
   renderStorySlides();
-  resetStoryAutoAdvance();
 }
 
 if (storySlides.length) {
@@ -939,6 +946,23 @@ if (storySlides.length) {
       { passive: true }
     );
   }
+}
+
+if (storySection && storySlides.length) {
+  const storyVisibilityObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          resetStoryAutoAdvance();
+        } else {
+          stopStoryAutoAdvance();
+        }
+      });
+    },
+    { threshold: 0.45 }
+  );
+
+  storyVisibilityObserver.observe(storySection);
 }
 
 sliderGrids.forEach((grid) => {
