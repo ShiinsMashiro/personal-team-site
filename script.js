@@ -1105,33 +1105,6 @@ sliderGrids.forEach((grid) => {
       setMembersTransform(0, false);
     });
 
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    shell.addEventListener(
-      "touchstart",
-      (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      },
-      { passive: true }
-    );
-
-    shell.addEventListener(
-      "touchend",
-      (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-        const threshold = 50;
-
-        if (diff > threshold) {
-          slideNextMember();
-        } else if (diff < -threshold) {
-          slidePrevMember();
-        }
-      },
-      { passive: true }
-    );
-
     return;
   }
 
@@ -1180,41 +1153,6 @@ sliderGrids.forEach((grid) => {
   render();
   window.addEventListener("resize", render);
 
-  // 触摸滑动支持
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  shell.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  shell.addEventListener("touchend", (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    const threshold = 50;
-    const visible = getVisibleCount();
-    const maxIndex = Math.max(0, baseCards.length - visible);
-
-    if (diff > threshold) {
-      if (isLoopingSlider) {
-        index = index >= maxIndex ? 0 : index + 1;
-        setGridTransition(true);
-        render();
-      } else if (index < maxIndex) {
-        index += 1;
-        render();
-      }
-    } else if (diff < -threshold) {
-      if (isLoopingSlider) {
-        index = index <= 0 ? maxIndex : index - 1;
-        setGridTransition(true);
-        render();
-      } else if (index > 0) {
-        index -= 1;
-        render();
-      }
-    }
-  }, { passive: true });
 });
 
 let lastWheelAt = 0;

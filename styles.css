@@ -2491,7 +2491,7 @@ main {
     width: 100%;
     overflow: hidden;
     overscroll-behavior-x: contain;
-    touch-action: pan-x;
+    touch-action: pan-y;
     padding-bottom: 72px;
     margin-bottom: 0;
     max-width: 100%;
